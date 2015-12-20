@@ -32,6 +32,7 @@
             this.SpisokShtatnEdinicButton = new System.Windows.Forms.Button();
             this.openFileSpisokPodrazdeleniy = new System.Windows.Forms.OpenFileDialog();
             this.openSpisokShtatnEdinic = new System.Windows.Forms.OpenFileDialog();
+            this.shtatnoeRaspisanieButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SpisokPodrazdeleniyButton
@@ -64,11 +65,22 @@
             this.openSpisokShtatnEdinic.FileName = "openSpisokShtatnEdinic";
             this.openSpisokShtatnEdinic.FileOk += new System.ComponentModel.CancelEventHandler(this.openSpisokShtatnEdinic_FileOk);
             // 
+            // shtatnoeRaspisanieButton
+            // 
+            this.shtatnoeRaspisanieButton.Location = new System.Drawing.Point(409, 12);
+            this.shtatnoeRaspisanieButton.Name = "shtatnoeRaspisanieButton";
+            this.shtatnoeRaspisanieButton.Size = new System.Drawing.Size(199, 44);
+            this.shtatnoeRaspisanieButton.TabIndex = 2;
+            this.shtatnoeRaspisanieButton.Text = "Сформировать штатное расписание";
+            this.shtatnoeRaspisanieButton.UseVisualStyleBackColor = true;
+            this.shtatnoeRaspisanieButton.Click += new System.EventHandler(this.shtatnoeRaspisanieButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 70);
+            this.ClientSize = new System.Drawing.Size(620, 70);
+            this.Controls.Add(this.shtatnoeRaspisanieButton);
             this.Controls.Add(this.SpisokShtatnEdinicButton);
             this.Controls.Add(this.SpisokPodrazdeleniyButton);
             this.Name = "Form1";
@@ -83,6 +95,7 @@
         private System.Windows.Forms.Button SpisokShtatnEdinicButton;
         private System.Windows.Forms.OpenFileDialog openFileSpisokPodrazdeleniy;
         private System.Windows.Forms.OpenFileDialog openSpisokShtatnEdinic;
+        private System.Windows.Forms.Button shtatnoeRaspisanieButton;
     }
 }
 

@@ -11,7 +11,7 @@ namespace ShtatRaspisanie
         //Наименование штатной единицы.
         string nameOfShtatnajaEdinica;
         //Наименование подразделения.
-        Podrazdelenie podr_name;
+        string podr_name;
         //Кол-во ставок.
         int rate;
 
@@ -43,7 +43,7 @@ namespace ShtatRaspisanie
             }
         }
 
-        internal Podrazdelenie Podr_name
+        internal string Podr_name
         {
             get
             {

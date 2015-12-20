@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,10 +28,10 @@ namespace ShtatRaspisanie
         {
             if (openFileSpisokPodrazdeleniy.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                System.IO.StreamReader sr = new
-                   System.IO.StreamReader(openFileDialog1.FileName);
-                MessageBox.Show(sr.ReadToEnd());
-                sr.Close();
+                MessageBox.Show("Файл со списком подразделений выбран!");
+                string filename = openFileSpisokPodrazdeleniy.FileName;
+                System.IO.FileStream stream = File.Open(filename, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                ParseExcelFile.parseSpisokPodrazdeleniyFile(stream);
             }
         }
 
@@ -45,13 +47,19 @@ namespace ShtatRaspisanie
 
         private void SpisokShtatnEdinicButton_Click(object sender, EventArgs e)
         {
+            
             if (openSpisokShtatnEdinic.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                System.IO.StreamReader sr = new
-                   System.IO.StreamReader(openFileDialog1.FileName);
-                MessageBox.Show(sr.ReadToEnd());
-                sr.Close();
+                MessageBox.Show("Файл со списком штатных единиц выбран!");
+                string filename = openSpisokShtatnEdinic.FileName;
+                System.IO.FileStream stream = File.Open(filename, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                ParseExcelFile.parseSpisokShtatnEdinicaFile(stream);
             }
+        }
+
+        private void shtatnoeRaspisanieButton_Click(object sender, EventArgs e)
+        {
+            WriteExcelFile.writeShtatnoeRaspisanie(ParseExcelFile.parseSpisokPodrazdeleniyFile, ParseExcelFile.parseSpisokShtatnEdinicaFile);
         }
     }
 }
