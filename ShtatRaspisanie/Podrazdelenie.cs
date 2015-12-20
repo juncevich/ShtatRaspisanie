@@ -8,5 +8,35 @@ namespace ShtatRaspisanie
 {
     class Podrazdelenie
     {
+        //Наименование подразделения.
+        string name;
+        //Родительское подразделение
+        string parent;
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                name = value;
+            }
+        }
+
+        public string Parent
+        {
+            get
+            {
+                return parent;
+            }
+
+            set
+            {
+                parent = value;
+            }
+        }
     }
 }

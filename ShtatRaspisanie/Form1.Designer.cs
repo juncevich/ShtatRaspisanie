@@ -28,29 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.SpisokPodrazdeleniyButton = new System.Windows.Forms.Button();
+            this.SpisokShtatnEdinicButton = new System.Windows.Forms.Button();
             this.openFileSpisokPodrazdeleniy = new System.Windows.Forms.OpenFileDialog();
             this.openSpisokShtatnEdinic = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
-            // button1
+            // SpisokPodrazdeleniyButton
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(180, 45);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Выбрать список подразделений";
-            this.button1.UseVisualStyleBackColor = true;
+            this.SpisokPodrazdeleniyButton.Location = new System.Drawing.Point(12, 12);
+            this.SpisokPodrazdeleniyButton.Name = "SpisokPodrazdeleniyButton";
+            this.SpisokPodrazdeleniyButton.Size = new System.Drawing.Size(180, 45);
+            this.SpisokPodrazdeleniyButton.TabIndex = 0;
+            this.SpisokPodrazdeleniyButton.Text = "Выбрать список подразделений";
+            this.SpisokPodrazdeleniyButton.UseVisualStyleBackColor = true;
+            this.SpisokPodrazdeleniyButton.Click += new System.EventHandler(this.SpisokPodrazdeleniyButton_Click);
             // 
-            // button2
+            // SpisokShtatnEdinicButton
             // 
-            this.button2.Location = new System.Drawing.Point(211, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(180, 45);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Выбрать список штатных единиц";
-            this.button2.UseVisualStyleBackColor = true;
+            this.SpisokShtatnEdinicButton.Location = new System.Drawing.Point(211, 12);
+            this.SpisokShtatnEdinicButton.Name = "SpisokShtatnEdinicButton";
+            this.SpisokShtatnEdinicButton.Size = new System.Drawing.Size(180, 45);
+            this.SpisokShtatnEdinicButton.TabIndex = 1;
+            this.SpisokShtatnEdinicButton.Text = "Выбрать список штатных единиц";
+            this.SpisokShtatnEdinicButton.UseVisualStyleBackColor = true;
+            this.SpisokShtatnEdinicButton.Click += new System.EventHandler(this.SpisokShtatnEdinicButton_Click);
             // 
             // openFileSpisokPodrazdeleniy
             // 
@@ -60,14 +62,15 @@
             // openSpisokShtatnEdinic
             // 
             this.openSpisokShtatnEdinic.FileName = "openSpisokShtatnEdinic";
+            this.openSpisokShtatnEdinic.FileOk += new System.ComponentModel.CancelEventHandler(this.openSpisokShtatnEdinic_FileOk);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(403, 70);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.SpisokShtatnEdinicButton);
+            this.Controls.Add(this.SpisokPodrazdeleniyButton);
             this.Name = "Form1";
             this.Text = "Штатное расписание v.0.01";
             this.ResumeLayout(false);
@@ -76,8 +79,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button SpisokPodrazdeleniyButton;
+        private System.Windows.Forms.Button SpisokShtatnEdinicButton;
         private System.Windows.Forms.OpenFileDialog openFileSpisokPodrazdeleniy;
         private System.Windows.Forms.OpenFileDialog openSpisokShtatnEdinic;
     }

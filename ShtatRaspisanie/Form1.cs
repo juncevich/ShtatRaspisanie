@@ -21,5 +21,37 @@ namespace ShtatRaspisanie
         {
 
         }
+
+        private void SpisokPodrazdeleniyButton_Click(object sender, EventArgs e)
+        {
+            if (openFileSpisokPodrazdeleniy.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                System.IO.StreamReader sr = new
+                   System.IO.StreamReader(openFileDialog1.FileName);
+                MessageBox.Show(sr.ReadToEnd());
+                sr.Close();
+            }
+        }
+
+        private void openSpisokShtatnEdinic_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void openFileDialog1_FileOk_1(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void SpisokShtatnEdinicButton_Click(object sender, EventArgs e)
+        {
+            if (openSpisokShtatnEdinic.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                System.IO.StreamReader sr = new
+                   System.IO.StreamReader(openFileDialog1.FileName);
+                MessageBox.Show(sr.ReadToEnd());
+                sr.Close();
+            }
+        }
     }
 }

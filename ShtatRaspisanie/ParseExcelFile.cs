@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ShtatRaspisanie
 {
-    
+    //Класс, который считывает xlsx файл и разбирает его на объекты.
     class ParseExcelFile
     {
+
     }
 }

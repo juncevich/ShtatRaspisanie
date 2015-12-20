@@ -8,5 +8,52 @@ namespace ShtatRaspisanie
 {
     class ShtatnEdinica
     {
+        //Наименование штатной единицы.
+        string nameOfShtatnajaEdinica;
+        //Наименование подразделения.
+        Podrazdelenie podr_name;
+        //Кол-во ставок.
+        int rate;
+
+        public string NameOfShtatnajaEdinica
+        {
+            get
+            {
+                return nameOfShtatnajaEdinica;
+            }
+
+            set
+            {
+                nameOfShtatnajaEdinica = value;
+            }
+        }
+
+
+
+        public int Rate
+        {
+            get
+            {
+                return rate;
+            }
+
+            set
+            {
+                rate = value;
+            }
+        }
+
+        internal Podrazdelenie Podr_name
+        {
+            get
+            {
+                return podr_name;
+            }
+
+            set
+            {
+                podr_name = value;
+            }
+        }
     }
 }
