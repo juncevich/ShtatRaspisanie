@@ -59,7 +59,7 @@ namespace ShtatRaspisanie
 
         private void shtatnoeRaspisanieButton_Click(object sender, EventArgs e)
         {
-            WriteExcelFile.writeShtatnoeRaspisanie(ParseExcelFile.parseSpisokPodrazdeleniyFile, ParseExcelFile.parseSpisokShtatnEdinicaFile);
+            WriteExcelFile.writeShtatnoeRaspisanie(ParseExcelFile.podrazdelenieList, ParseExcelFile.shtatnEdinicaList);
         }
     }
 }
