@@ -13,18 +13,34 @@ namespace ShtatRaspisanie
     //Класс, который считывает xlsx файл и разбирает его на объекты.
     class ParseExcelFile
     {
+        //Список подразделений.
         public static ArrayList podrazdelenieList { get; private set; }
+        //Список родителей.
+        public static ArrayList parentList { get; private set; }
+        //Список штатных единиц.
         public static ArrayList shtatnEdinicaList { get; private set; }
+        //Есть ли файл со списком подразделений.
         public static Boolean isSpisokPodrazdeleniyFileExist { get; private set; }
+        //Есть ли файл со списком штатных единиц.
         public static Boolean isSpisokShtatnEdinicaFileExist { get; private set; }
+
+        //Разбираем файл со списком подразделений.
         public static void parseSpisokPodrazdeleniyFile(FileStream stream)
         {
+            //Загружаем файл.
             IExcelDataReader openFileSpisokPodrazdeleniyReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+            //Представляем загруженный файл как DataSet.
             DataSet result = openFileSpisokPodrazdeleniyReader.AsDataSet();
+            //Выбираем из DataSet первую таблицу.
             DataTable spisokPodrazdeleniyTable = result.Tables[0];
+            //Создаем список подразделений.
             ArrayList podrazdelenieList = new ArrayList();
-            for (int i =1; i<spisokPodrazdeleniyTable.Rows.Count; i++)
+            //Создаем список родителей.
+            ArrayList parentList = new ArrayList();
+            //Перебор значений в таблице.
+            for (int i = 1; i < spisokPodrazdeleniyTable.Rows.Count; i++)
             {
+
                 if (spisokPodrazdeleniyTable.Rows[i][1] != DBNull.Value) {
                     Podrazdelenie podrazdelenie = new Podrazdelenie();
                     podrazdelenie.name = (String) spisokPodrazdeleniyTable.Rows[i][0];
@@ -32,16 +48,28 @@ namespace ShtatRaspisanie
                     Console.WriteLine(podrazdelenie.name + " " + podrazdelenie.parent);
                     podrazdelenieList.Add(podrazdelenie);
                      }
+
+                if (spisokPodrazdeleniyTable.Rows[i][0] != DBNull.Value && spisokPodrazdeleniyTable.Rows[i][1] == DBNull.Value)
+                {
+                    Podrazdelenie podrazdelenie = new Podrazdelenie();
+                    podrazdelenie.name = (String)spisokPodrazdeleniyTable.Rows[i][0];
+                    podrazdelenie.parent = " ";
+                    Console.WriteLine(podrazdelenie.name + " " + podrazdelenie.parent);
+                    parentList.Add(podrazdelenie);
+                }
                
             }
             isSpisokPodrazdeleniyFileExist = true;
             Console.WriteLine(podrazdelenieList.Count);
             
         }
+        // Получаем список подразделений.
         public static ArrayList getPodrazdelenieList()
         {
             return podrazdelenieList;
         }
+
+
         public static void parseSpisokShtatnEdinicaFile(FileStream stream)
         {
             IExcelDataReader openSpisokShtatnEdinicReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
@@ -50,6 +78,7 @@ namespace ShtatRaspisanie
             ArrayList shtatnEdinicaList = new ArrayList();
             for (int i = 1; i < spisokShtatnEdinicTable.Rows.Count; i++)
             {
+
                 if (spisokShtatnEdinicTable.Rows[i][1] != DBNull.Value)
                 {
                     ShtatnEdinica shtanEdenica = new ShtatnEdinica();
