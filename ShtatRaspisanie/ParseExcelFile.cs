@@ -1,12 +1,8 @@
 ﻿using Excel;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShtatRaspisanie
 {
@@ -24,6 +20,7 @@ namespace ShtatRaspisanie
             DataSet result = openFileSpisokPodrazdeleniyReader.AsDataSet();
             DataTable spisokPodrazdeleniyTable = result.Tables[0];
             List<Podrazdelenie> podrazdelenieListLocal = new List<Podrazdelenie>();
+
             for (int i =1; i<spisokPodrazdeleniyTable.Rows.Count; i++)
             {
                 if (spisokPodrazdeleniyTable.Rows[i][1] != DBNull.Value) {
