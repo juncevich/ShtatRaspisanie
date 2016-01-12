@@ -12,7 +12,8 @@ namespace ShtatRaspisanie
         public List<NestedUnit> NestedUnitList { get; set; }
         public ParentUnit()
         {
-            parent = " ";
+            List<NestedUnit> nestedUnitListLocal = new List<NestedUnit>();
+            NestedUnitList = nestedUnitListLocal;
         }
     }
 }

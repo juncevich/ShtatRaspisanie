@@ -15,13 +15,13 @@ namespace ShtatRaspisanie
         internal static void writeShtatnoeRaspisanie(Action<FileStream> parseSpisokPodrazdeleniyFile, Action<FileStream> parseSpisokShtatnEdinicaFile)
         {
 
-            if (ParseExcelFile.isSpisokShtatnEdinicaFileExist && ParseExcelFile.isSpisokPodrazdeleniyFileExist)
+            if (ParseExcelFile.IsSpisokShtatnEdinicaFileExist && ParseExcelFile.IsSpisokPodrazdeleniyFileExist)
             {
 
                 //Получаем список подразделений из файла.
-                List<Podrazdelenie> podrazdelenieList = ParseExcelFile.podrazdelenieList;
+                List<Podrazdelenie> podrazdelenieList = ParseExcelFile.PodrazdelenieList;
                 //Получаем список штатных единиц из файла.
-                List<ShtatnEdinica> shtatnEdinicaList = ParseExcelFile.shtatnEdinicaList;
+                List<ShtatnEdinica> shtatnEdinicaList = ParseExcelFile.ShtatnEdinicaList;
                 //Начинаем перебор в уникальном списке подразделений
                 foreach (Podrazdelenie uniqParent in podrazdelenieList)
                 {

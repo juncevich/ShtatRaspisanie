@@ -10,5 +10,10 @@ namespace ShtatRaspisanie
     class NestedUnit:Podrazdelenie
     {
         public List<ShtatnEdinica> ShtatnEdinicaList { get; set; }
+        public NestedUnit()
+        {
+            List<ShtatnEdinica> shtatnEdinicaListLocal = new List<ShtatnEdinica>();
+            ShtatnEdinicaList = shtatnEdinicaListLocal;
+        }
     }
 }

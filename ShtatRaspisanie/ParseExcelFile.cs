@@ -10,10 +10,10 @@ namespace ShtatRaspisanie
     //Класс, который считывает xlsx файл и разбирает его на объекты.
     class ParseExcelFile
     {
-        public static List<Podrazdelenie> podrazdelenieList { get; private set; }
-        public static List<ShtatnEdinica> shtatnEdinicaList { get; private set; }
-        public static Boolean isSpisokPodrazdeleniyFileExist { get; private set; }
-        public static Boolean isSpisokShtatnEdinicaFileExist { get; private set; }
+        public static List<Podrazdelenie> PodrazdelenieList { get; private set; }
+        public static List<ShtatnEdinica> ShtatnEdinicaList { get; private set; }
+        public static Boolean IsSpisokPodrazdeleniyFileExist { get; private set; }
+        public static Boolean IsSpisokShtatnEdinicaFileExist { get; private set; }
 
         public static void parseParentList(FileStream stream)
         {
@@ -27,21 +27,53 @@ namespace ShtatRaspisanie
                 return;
                 
             }
-
-            for (int i = 1; i < spisokPodrazdeleniyTable.Rows.Count; i++)
+            List<Podrazdelenie> podrazdelenieListLocal = new List<Podrazdelenie>();
+            // Перебираем содержимое файла.
+            int i = 1;
+            while (i < spisokPodrazdeleniyTable.Rows.Count)
             {
-
-                if(spisokPodrazdeleniyTable.Rows[i][1] != DBNull.Value)
+                
+                //Если поле "PARENT" равно null.
+                if (spisokPodrazdeleniyTable.Rows[i][1] == DBNull.Value)
                 {
-                    Podrazdelenie podrazdelenie = new Podrazdelenie();
-                    podrazdelenie.name = (String)spisokPodrazdeleniyTable.Rows[i][0];
-                    podrazdelenie.parent = (String)spisokPodrazdeleniyTable.Rows[i][1];
-                    Console.WriteLine(podrazdelenie.name + " " + podrazdelenie.parent);
-                    //podrazdelenieListLocal.Add(podrazdelenie);
+                    ParentUnit parentUnit = new ParentUnit();
+                    parentUnit.name = (string) spisokPodrazdeleniyTable.Rows[i][0];
+                    parentUnit.parent = " ";
+                    i++;
+                    while (i < spisokPodrazdeleniyTable.Rows.Count && spisokPodrazdeleniyTable.Rows[i][1] != DBNull.Value)
+                    {
+                        NestedUnit nestedUnit = new NestedUnit();
+                        nestedUnit.name = (string) spisokPodrazdeleniyTable.Rows[i][0];
+                        nestedUnit.parent = (string) spisokPodrazdeleniyTable.Rows[i][1];
+                        parentUnit.NestedUnitList.Add(nestedUnit);
+                        if (spisokPodrazdeleniyTable.Rows[i-1][1] != DBNull.Value  && spisokPodrazdeleniyTable.Rows[i-1][0]== spisokPodrazdeleniyTable.Rows[i][1])
+                        {
+                            ParentUnit parentUnitLocal = new ParentUnit();
+                            parentUnitLocal.name = (string) spisokPodrazdeleniyTable.Rows[i - 1][0];
+                            parentUnitLocal.parent = parentUnit.name;
+                            i++;
+                            while (i < spisokPodrazdeleniyTable.Rows.Count)
+                            {
+                                
+                                NestedUnit nestedUnitLocal = new NestedUnit();
+                                nestedUnitLocal.name = (string) spisokPodrazdeleniyTable.Rows[i][0];
+                                nestedUnitLocal.parent = (string) spisokPodrazdeleniyTable.Rows[i][1];
+                                parentUnitLocal.NestedUnitList.Add(nestedUnitLocal);
+                                i++;
+
+                            }
+                            podrazdelenieListLocal.Add(parentUnitLocal);
+                        }
+                        i++;
+
+                    }
+                    podrazdelenieListLocal.Add(parentUnit);
+
                 }
 
 
             }
+            PodrazdelenieList = podrazdelenieListLocal;
         }
 
         public static void parseSpisokPodrazdeleniyFile(FileStream stream)
@@ -62,8 +94,8 @@ namespace ShtatRaspisanie
                      }
                
             }
-            podrazdelenieList = podrazdelenieListLocal;
-            isSpisokPodrazdeleniyFileExist = true;
+            PodrazdelenieList = podrazdelenieListLocal;
+            IsSpisokPodrazdeleniyFileExist = true;
             Console.WriteLine(podrazdelenieListLocal.Count);
             
         }
@@ -87,8 +119,8 @@ namespace ShtatRaspisanie
                 }
 
             }
-            shtatnEdinicaList = shtatnEdinicaListLocal;
-            isSpisokShtatnEdinicaFileExist = true;
+            ShtatnEdinicaList = shtatnEdinicaListLocal;
+            IsSpisokShtatnEdinicaFileExist = true;
             Console.WriteLine(shtatnEdinicaListLocal.Count);
             
         }
