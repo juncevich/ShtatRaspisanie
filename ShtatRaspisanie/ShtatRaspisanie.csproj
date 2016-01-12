@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Element.cs" />
+    <Compile Include="NestesUnit.cs" />
+    <Compile Include="ParentUnit.cs" />
     <Compile Include="Podrazdelenie.cs" />
     <Compile Include="ShtatnEdinica.cs" />
     <Compile Include="ParseExcelFile.cs" />
