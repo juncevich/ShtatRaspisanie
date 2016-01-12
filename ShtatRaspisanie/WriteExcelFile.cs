@@ -18,8 +18,6 @@ namespace ShtatRaspisanie
             if (ParseExcelFile.isSpisokShtatnEdinicaFileExist && ParseExcelFile.isSpisokPodrazdeleniyFileExist)
             {
 
-                //Список уникальных подразделений.
-                HashSet<Podrazdelenie> podrazdelenieSet = new HashSet<Podrazdelenie>();
                 //Получаем список подразделений из файла.
                 List<Podrazdelenie> podrazdelenieList = ParseExcelFile.podrazdelenieList;
                 //Получаем список штатных единиц из файла.
