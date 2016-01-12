@@ -19,11 +19,11 @@ namespace ShtatRaspisanie
             {
 
                 //Получаем список подразделений из файла.
-                List<Podrazdelenie> podrazdelenieList = ParseExcelFile.PodrazdelenieList;
+                List<Unit> podrazdelenieList = ParseExcelFile.PodrazdelenieList;
                 //Получаем список штатных единиц из файла.
-                List<ShtatnEdinica> shtatnEdinicaList = ParseExcelFile.ShtatnEdinicaList;
+                List<StaffUnit> shtatnEdinicaList = ParseExcelFile.ShtatnEdinicaList;
                 //Начинаем перебор в уникальном списке подразделений
-                foreach (Podrazdelenie uniqParent in podrazdelenieList)
+                foreach (Unit uniqParent in podrazdelenieList)
                 {
                     //Переменная для подсчета общего количества ставок по подразделениям.
                     int rate = 0;

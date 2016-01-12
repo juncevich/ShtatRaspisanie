@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShtatRaspisanie
 {
-    class ShtatnEdinica
+    class StaffUnit
     {
         //Наименование штатной единицы.
         string nameOfShtatnajaEdinica;

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace ShtatRaspisanie
 {
     //Вложенные подразделения.
-    class NestedUnit:Podrazdelenie
+    class NestedUnit:Unit
     {
-        public List<ShtatnEdinica> ShtatnEdinicaList { get; set; }
+        public List<StaffUnit> ShtatnEdinicaList { get; set; }
         public NestedUnit()
         {
-            List<ShtatnEdinica> shtatnEdinicaListLocal = new List<ShtatnEdinica>();
+            List<StaffUnit> shtatnEdinicaListLocal = new List<StaffUnit>();
             ShtatnEdinicaList = shtatnEdinicaListLocal;
         }
     }
