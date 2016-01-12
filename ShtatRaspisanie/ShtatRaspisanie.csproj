@@ -69,7 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Element.cs" />
-    <Compile Include="NestesUnit.cs" />
+    <Compile Include="NestedUnit.cs" />
     <Compile Include="ParentUnit.cs" />
     <Compile Include="Podrazdelenie.cs" />
     <Compile Include="ShtatnEdinica.cs" />

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace ShtatRaspisanie
 {
     //Родительское подразделение.
-    class ParentUnit
+    class ParentUnit:Podrazdelenie
     {
+         
     }
 }

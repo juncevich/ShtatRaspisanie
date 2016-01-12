@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ShtatRaspisanie
 {
     //Вложенные подразделения.
-    class NestesUnit
+    class NestedUnit:Podrazdelenie
     {
 
     }
