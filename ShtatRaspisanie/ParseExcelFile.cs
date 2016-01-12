@@ -27,6 +27,7 @@ namespace ShtatRaspisanie
                 return;
                 
             }
+
             for (int i = 1; i < spisokPodrazdeleniyTable.Rows.Count; i++)
             {
 
