@@ -9,6 +9,6 @@ namespace ShtatRaspisanie
     //Вложенные подразделения.
     class NestedUnit:Podrazdelenie
     {
-
+        public List<ShtatnEdinica> ShtatnEdinicaList { get; set; }
     }
 }

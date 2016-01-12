@@ -9,6 +9,10 @@ namespace ShtatRaspisanie
     //Родительское подразделение.
     class ParentUnit:Podrazdelenie
     {
-         
+        public List<NestedUnit> NestedUnitList { get; set; }
+        public ParentUnit()
+        {
+            parent = " ";
+        }
     }
 }
