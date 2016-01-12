@@ -24,7 +24,8 @@ namespace ShtatRaspisanie
                 MessageBox.Show("Файл со списком подразделений выбран!");
                 string filename = openFileSpisokPodrazdeleniy.FileName;
                 FileStream stream = File.Open(filename, FileMode.Open, FileAccess.Read);
-                ParseExcelFile.parseParentList(stream);
+                UnitBuilder unitBuilder = new UnitBuilder(ParseExcelFile.parseParentList(stream));
+                unitBuilder.setChildByAll();
             }
         }
 

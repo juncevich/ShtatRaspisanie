@@ -14,12 +14,13 @@ namespace ShtatRaspisanie
         public static List<StaffUnit> ShtatnEdinicaList { get; private set; }
         public static Boolean IsSpisokPodrazdeleniyFileExist { get; private set; }
         public static Boolean IsSpisokShtatnEdinicaFileExist { get; private set; }
+        List<Unit> unitList;
 
-        
+
         public static List<Unit> parseParentList(FileStream stream)
         {
-            IExcelDataReader openFileSpisokPodrazdeleniyReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-            DataSet result = openFileSpisokPodrazdeleniyReader.AsDataSet();
+            IExcelDataReader unitListFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+            DataSet result = unitListFileReader.AsDataSet();
             DataTable spisokPodrazdeleniyTable = result.Tables[0];
             int unitTableLenght = spisokPodrazdeleniyTable.Rows.Count;
 
@@ -29,22 +30,22 @@ namespace ShtatRaspisanie
                 return null;
                 
             }
-            List<Unit> podrazdelenieListLocal = new List<Unit>();
+            List<Unit> unitList = new List<Unit>();
             for (int i=1; i<unitTableLenght; i++)
             {
-                Unit podrazdelenie = new Unit();
-                podrazdelenie.name = (string)spisokPodrazdeleniyTable.Rows[i][0];
+                Unit unit = new Unit();
+                unit.name = (string)spisokPodrazdeleniyTable.Rows[i][0];
                 if (spisokPodrazdeleniyTable.Rows[i][1] == DBNull.Value)
                 {
-                    podrazdelenie.parent = " ";
+                    unit.parent = " ";
                 } else
                 {
-                    podrazdelenie.parent = (string) spisokPodrazdeleniyTable.Rows[i][1];
+                    unit.parent = (string) spisokPodrazdeleniyTable.Rows[i][1];
                 }
 
-                podrazdelenieListLocal.Add(podrazdelenie);
+                unitList.Add(unit);
             }
-            return podrazdelenieListLocal;
+            return unitList;
 
 
             ////Список подразделений.
@@ -97,7 +98,7 @@ namespace ShtatRaspisanie
 
 
             //}
-            PodrazdelenieList = podrazdelenieListLocal;
+            PodrazdelenieList = unitList;
         }
 
         public static void parseSpisokPodrazdeleniyFile(FileStream stream)

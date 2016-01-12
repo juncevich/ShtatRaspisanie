@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ShtatRaspisanie
 {
@@ -13,7 +9,7 @@ namespace ShtatRaspisanie
         //Родительское подразделение
         public string parent { get; set; }
         //Потомок родителя.
-        public string child { get; set; }
+        public List<Unit> child { get; set; }
 
     }
 }
