@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Windows.Forms;
 
 namespace ShtatRaspisanie
 {
@@ -13,6 +14,34 @@ namespace ShtatRaspisanie
         public static List<ShtatnEdinica> shtatnEdinicaList { get; private set; }
         public static Boolean isSpisokPodrazdeleniyFileExist { get; private set; }
         public static Boolean isSpisokShtatnEdinicaFileExist { get; private set; }
+
+        public static void parseParentList(FileStream stream)
+        {
+            IExcelDataReader openFileSpisokPodrazdeleniyReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+            DataSet result = openFileSpisokPodrazdeleniyReader.AsDataSet();
+            DataTable spisokPodrazdeleniyTable = result.Tables[0];
+
+            if ((string)spisokPodrazdeleniyTable.Rows[0][0] != "NAME" && (string)spisokPodrazdeleniyTable.Rows[0][1] != "PARENT")
+            {
+                MessageBox.Show("Выбран не корректный файл");
+                return;
+                
+            }
+            for (int i = 1; i < spisokPodrazdeleniyTable.Rows.Count; i++)
+            {
+
+                if(spisokPodrazdeleniyTable.Rows[i][1] != DBNull.Value)
+                {
+                    Podrazdelenie podrazdelenie = new Podrazdelenie();
+                    podrazdelenie.name = (String)spisokPodrazdeleniyTable.Rows[i][0];
+                    podrazdelenie.parent = (String)spisokPodrazdeleniyTable.Rows[i][1];
+                    Console.WriteLine(podrazdelenie.name + " " + podrazdelenie.parent);
+                    //podrazdelenieListLocal.Add(podrazdelenie);
+                }
+
+
+            }
+        }
 
         public static void parseSpisokPodrazdeleniyFile(FileStream stream)
         {
