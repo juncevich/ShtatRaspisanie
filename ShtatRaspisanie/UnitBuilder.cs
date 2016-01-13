@@ -33,9 +33,24 @@ namespace ShtatRaspisanie
 
         public void DisplayUnitList()
         {
-            foreach (var child in parentList.Where(item => item.child != null).SelectMany(item => item.child))
+            foreach (var parent in parentList.Where(parent => parent.parent == " "))
             {
-                Console.WriteLine(child.name + "" + child.parent);
+                Console.WriteLine(parent.name);
+                foreach (var child in parent.child)
+                {
+                    Console.WriteLine(child);
+                    if (child.child !=null)
+                    {
+                        foreach (var nestedChild in child.child)
+                        {
+                            Console.WriteLine(nestedChild);
+                        }
+                    }
+                }
+//                foreach (var child in parentList.Where(item => item.parent == parent.name).SelectMany(item => item.child))
+//                {
+//                    Console.WriteLine(child.name + " " + child.parent);
+//                }
             }
         }
     }

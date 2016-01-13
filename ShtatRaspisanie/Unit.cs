@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ShtatRaspisanie
 {
@@ -12,5 +13,11 @@ namespace ShtatRaspisanie
 
         //Потомок родителя.
         public List<Unit> child { get; set; }
+
+        public override String ToString()
+        {
+            string view = name + " " + parent;
+            return view;
+        }
     }
 }

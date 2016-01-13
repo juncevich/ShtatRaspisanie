@@ -25,6 +25,7 @@ namespace ShtatRaspisanie
                 var stream = File.Open(filename, FileMode.Open, FileAccess.Read);
                 var unitBuilder = new UnitBuilder(ParseExcelFile.ParseParentList(stream));
                 unitBuilder.SetChildByAll();
+                unitBuilder.DisplayUnitList();
             }
         }
 
