@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ShtatRaspisanie
 {
@@ -22,40 +23,19 @@ namespace ShtatRaspisanie
 
         private Unit FindParent(Unit unit)
         {
-            foreach (var item in parentList)
-            {
-                if (item.child.Equals(unit.name))
-                {
-                    return item;
-                }
-            }
-            return null;
+            return parentList.FirstOrDefault(item => item.child.Equals(unit.name));
         }
 
         private List<Unit> FindChildren(Unit unit)
         {
-            var tempList = new List<Unit>();
-            foreach (var item in parentList)
-            {
-                if (item.parent.Equals(unit.name))
-                {
-                    tempList.Add(item);
-                }
-            }
-            return tempList;
+            return parentList.Where(item => item.parent.Equals(unit.name)).ToList();
         }
 
         public void DisplayUnitList()
         {
-            foreach (var item in parentList)
+            foreach (var child in parentList.Where(item => item.child != null).SelectMany(item => item.child))
             {
-                if (item.child != null)
-                {
-                    foreach (var child in item.child)
-                    {
-                        Console.WriteLine(child.name + "" + child.parent);
-                    }
-                }
+                Console.WriteLine(child.name + "" + child.parent);
             }
         }
     }
