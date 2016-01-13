@@ -46,6 +46,20 @@ namespace ShtatRaspisanie
             return tempList;
         }
 
+        private void displayUnitList()
+        {
+            foreach (Unit item in parentList)
+            {
+                if (item.child != null)
+                {
+                    foreach (Unit child in item.child)
+                    {
+                        System.Console.WriteLine(child.name + " " + child.parent);
+                    }
+                }
+            }
+        }
+
 
     }
 }
