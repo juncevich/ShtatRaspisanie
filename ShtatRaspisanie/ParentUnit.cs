@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ShtatRaspisanie
 {
     //Родительское подразделение.
-    class ParentUnit:Unit
+    internal class ParentUnit : Unit
     {
-        public List<NestedUnit> NestedUnitList { get; set; }
         public ParentUnit()
         {
-            List<NestedUnit> nestedUnitListLocal = new List<NestedUnit>();
+            var nestedUnitListLocal = new List<NestedUnit>();
             NestedUnitList = nestedUnitListLocal;
         }
+
+        public List<NestedUnit> NestedUnitList { get; set; }
     }
 }

@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ShtatRaspisanie
 {
     //Вложенные подразделения.
-    class NestedUnit:Unit
+    internal class NestedUnit : Unit
     {
-        public List<StaffUnit> ShtatnEdinicaList { get; set; }
         public NestedUnit()
         {
-            List<StaffUnit> shtatnEdinicaListLocal = new List<StaffUnit>();
+            var shtatnEdinicaListLocal = new List<StaffUnit>();
             ShtatnEdinicaList = shtatnEdinicaListLocal;
         }
+
+        public List<StaffUnit> ShtatnEdinicaList { get; set; }
     }
 }

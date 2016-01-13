@@ -1,59 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ShtatRaspisanie
+﻿namespace ShtatRaspisanie
 {
-    class StaffUnit
+    internal class StaffUnit
     {
         //Наименование штатной единицы.
-        string nameOfShtatnajaEdinica;
         //Наименование подразделения.
-        string podr_name;
         //Кол-во ставок.
-        int rate;
 
-        public string NameOfShtatnajaEdinica
-        {
-            get
-            {
-                return nameOfShtatnajaEdinica;
-            }
+        public string NameOfShtatnajaEdinica { get; set; }
 
-            set
-            {
-                nameOfShtatnajaEdinica = value;
-            }
-        }
+        public int Rate { get; set; }
 
-
-
-        public int Rate
-        {
-            get
-            {
-                return rate;
-            }
-
-            set
-            {
-                rate = value;
-            }
-        }
-
-        internal string Podr_name
-        {
-            get
-            {
-                return podr_name;
-            }
-
-            set
-            {
-                podr_name = value;
-            }
-        }
+        internal string Podr_name { get; set; }
     }
 }

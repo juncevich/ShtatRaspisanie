@@ -1,29 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ShtatRaspisanie
 {
-    class UnitBuilder
+    internal class UnitBuilder
     {
-        List<Unit> parentList;
+        private readonly List<Unit> parentList;
 
         public UnitBuilder(List<Unit> parentList)
         {
             this.parentList = parentList;
         }
 
-        public void setChildByAll()
+        public void SetChildByAll()
         {
-            foreach (Unit unit in parentList)
+            foreach (var unit in parentList)
             {
-
-                unit.child = findChildren(unit);
-
+                unit.child = FindChildren(unit);
             }
         }
 
-        private Unit findParent(Unit unit)
+        private Unit FindParent(Unit unit)
         {
-            foreach (Unit item in parentList)
+            foreach (var item in parentList)
             {
                 if (item.child.Equals(unit.name))
                 {
@@ -33,10 +32,10 @@ namespace ShtatRaspisanie
             return null;
         }
 
-        private List<Unit> findChildren(Unit unit)
+        private List<Unit> FindChildren(Unit unit)
         {
-            List<Unit> tempList = new List<Unit>();
-            foreach (Unit item in parentList)
+            var tempList = new List<Unit>();
+            foreach (var item in parentList)
             {
                 if (item.parent.Equals(unit.name))
                 {
@@ -46,20 +45,18 @@ namespace ShtatRaspisanie
             return tempList;
         }
 
-        private void displayUnitList()
+        public void DisplayUnitList()
         {
-            foreach (Unit item in parentList)
+            foreach (var item in parentList)
             {
                 if (item.child != null)
                 {
-                    foreach (Unit child in item.child)
+                    foreach (var child in item.child)
                     {
-                        System.Console.WriteLine(child.name + " " + child.parent);
+                        Console.WriteLine(child.name + "" + child.parent);
                     }
                 }
             }
         }
-
-
     }
 }
