@@ -21,7 +21,9 @@ namespace ShtatRaspisanie
             if (openUnitListFile.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show(@"Файл со списком подразделений выбран!");
-                StaffDao.GetAllUnits(ParseExcelFile.ParseUnitFile(openUnitListFile.FileName));
+                StaffDao staffDao = new StaffDao();
+                staffDao.GetAllUnits(ParseExcelFile.ParseUnitFile(openUnitListFile.FileName));
+                staffDao.SetChildToUnitList();
                 // TO DO Delete.
                 //var filename = openUnitListFile.FileName;
                 //var stream = File.Open(filename, FileMode.Open, FileAccess.Read);
