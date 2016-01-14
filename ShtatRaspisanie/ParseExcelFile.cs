@@ -38,14 +38,14 @@ namespace ShtatRaspisanie
             for (var i = 1; i < unitTableLenght; i++)
             {
                 var unit = new Unit();
-                unit.name = (string) spisokPodrazdeleniyTable.Rows[i][0];
+                unit.Name = (string) spisokPodrazdeleniyTable.Rows[i][0];
                 if (spisokPodrazdeleniyTable.Rows[i][1] == DBNull.Value)
                 {
-                    unit.parent = " ";
+                    unit.Parent = " ";
                 }
                 else
                 {
-                    unit.parent = (string) spisokPodrazdeleniyTable.Rows[i][1];
+                    unit.Parent = (string) spisokPodrazdeleniyTable.Rows[i][1];
                 }
 
                 unitList.Add(unit);
@@ -116,11 +116,11 @@ namespace ShtatRaspisanie
                 {
                     var podrazdelenie = new Unit
                     {
-                        name = (string) spisokPodrazdeleniyTable.Rows[i][0],
-                        parent = (string) spisokPodrazdeleniyTable.Rows[i][1]
+                        Name = (string) spisokPodrazdeleniyTable.Rows[i][0],
+                        Parent = (string) spisokPodrazdeleniyTable.Rows[i][1]
                     };
-                    Console.WriteLine(podrazdelenie.name + " " + podrazdelenie.
-parent);
+                    Console.WriteLine(podrazdelenie.Name + " " + podrazdelenie.
+Parent);
                     podrazdelenieListLocal.Add(podrazdelenie);
                 }
             }

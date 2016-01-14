@@ -17,31 +17,31 @@ namespace ShtatRaspisanie
         {
             foreach (var unit in parentList)
             {
-                unit.child = FindChildren(unit);
+                unit.Child = FindChildren(unit);
             }
         }
 
         private Unit FindParent(Unit unit)
         {
-            return parentList.FirstOrDefault(item => item.child.Equals(unit.name));
+            return parentList.FirstOrDefault(item => item.Child.Equals(unit.Name));
         }
 
         private List<Unit> FindChildren(Unit unit)
         {
-            return parentList.Where(item => item.parent.Equals(unit.name)).ToList();
+            return parentList.Where(item => item.Parent.Equals(unit.Name)).ToList();
         }
 
         public void DisplayUnitList()
         {
-            foreach (var parent in parentList.Where(parent => parent.parent == " "))
+            foreach (var parent in parentList.Where(parent => parent.Parent == " "))
             {
-                Console.WriteLine(parent.name);
-                foreach (var child in parent.child)
+                Console.WriteLine(parent.Name);
+                foreach (var child in parent.Child)
                 {
                     Console.WriteLine(child);
-                    if (child.child !=null)
+                    if (child.Child !=null)
                     {
-                        foreach (var nestedChild in child.child)
+                        foreach (var nestedChild in child.Child)
                         {
                             Console.WriteLine(nestedChild);
                         }

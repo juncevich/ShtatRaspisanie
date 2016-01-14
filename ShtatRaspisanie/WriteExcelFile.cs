@@ -25,12 +25,12 @@ namespace ShtatRaspisanie
                     var rate = 0;
                     Console.WriteLine("---------------------------------------");
                     //Вывод родителя подразделения.
-                    Console.WriteLine(uniqParent.parent);
+                    Console.WriteLine(uniqParent.Parent);
                     //Перебираем список со штатными единицами.
                     for (var i = 0; i < shtatnEdinicaList.Count; i++)
                     {
                         //Выбор конкретных записей, родитель у которых объявлен выше.
-                        if (uniqParent.name == shtatnEdinicaList[i].Podr_name)
+                        if (uniqParent.Name == shtatnEdinicaList[i].Podr_name)
                         {
                             //Подсчет общего количества ставок по подразделениям.
                             rate = rate + shtatnEdinicaList[i].Rate;
@@ -40,7 +40,7 @@ namespace ShtatRaspisanie
                         }
                     }
                     //Вывод общего количества ставок по подразделениям.
-                    Console.WriteLine(@"Общее количество по участку " + uniqParent.name + ": " + rate);
+                    Console.WriteLine(@"Общее количество по участку " + uniqParent.Name + ": " + rate);
                 }
 
                 //Начало создания файла.

@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ShtatRaspisanie
 {
     internal class Unit
     {
         //Наименование подразделения.
-        public string name { get; set; }
+        public string Name { get; set; }
 
         //Родительское подразделение
-        public string parent { get; set; }
+        public string Parent { get; set; }
 
         //Потомок родителя.
-        public List<Unit> child { get; set; }
+        public List<Unit> Child { get; set; }
+        
 
-        public override String ToString()
+        public override string ToString()
         {
-            string view = name + " " + parent;
+            string view = Name + " " + Parent;
             return view;
         }
     }
