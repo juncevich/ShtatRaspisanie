@@ -16,16 +16,18 @@ namespace ShtatRaspisanie
         {
         }
 
-        private void SpisokPodrazdeleniyButton_Click(object sender, EventArgs e)
+        private void UnitListButton_Click(object sender, EventArgs e)
         {
-            if (openFileSpisokPodrazdeleniy.ShowDialog() == DialogResult.OK)
+            if (openUnitListFile.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show("Файл со списком подразделений выбран!");
-                var filename = openFileSpisokPodrazdeleniy.FileName;
-                var stream = File.Open(filename, FileMode.Open, FileAccess.Read);
-                var unitBuilder = new UnitBuilder(ParseExcelFile.ParseParentList(stream));
-                unitBuilder.SetChildByAll();
-                unitBuilder.DisplayUnitList();
+                MessageBox.Show(@"Файл со списком подразделений выбран!");
+                StaffDao.GetAllUnits(ParseExcelFile.ParseUnitFile(openUnitListFile.FileName));
+                // TO DO Delete.
+                //var filename = openUnitListFile.FileName;
+                //var stream = File.Open(filename, FileMode.Open, FileAccess.Read);
+                //var unitBuilder = new UnitBuilder(ParseExcelFile.ParseParentList(stream));
+                //unitBuilder.SetChildByAll();
+                //unitBuilder.DisplayUnitList();
             }
         }
 

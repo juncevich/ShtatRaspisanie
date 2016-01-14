@@ -30,13 +30,13 @@ namespace ShtatRaspisanie
                     for (var i = 0; i < shtatnEdinicaList.Count; i++)
                     {
                         //Выбор конкретных записей, родитель у которых объявлен выше.
-                        if (uniqParent.Name == shtatnEdinicaList[i].Podr_name)
+                        if (uniqParent.Name == shtatnEdinicaList[i].PodrName)
                         {
                             //Подсчет общего количества ставок по подразделениям.
                             rate = rate + shtatnEdinicaList[i].Rate;
                             //Вывод значений.
                             Console.WriteLine(shtatnEdinicaList[i].NameOfShtatnajaEdinica + " " +
-                                              shtatnEdinicaList[i].Podr_name + " " + shtatnEdinicaList[i].Rate);
+                                              shtatnEdinicaList[i].PodrName + " " + shtatnEdinicaList[i].Rate);
                         }
                     }
                     //Вывод общего количества ставок по подразделениям.

@@ -17,13 +17,38 @@ namespace ShtatRaspisanie
             this.unitList = unitList;
         }
 
+
+
         public static List<Unit> PodrazdelenieList { get; private set; }
         public static List<StaffUnit> ShtatnEdinicaList { get; private set; }
         public static bool IsSpisokPodrazdeleniyFileExist { get; private set; }
         public static bool IsSpisokShtatnEdinicaFileExist { get; private set; }
-
-        public Hashtable ParseUnitFile(FileStream stream)
+        private static FileStream _unitFileStream;
+        private static string _unitFileName;
+        public static FileStream GetUnitFileStream()
         {
+            return _unitFileStream;
+        }
+
+        public static void SetUnitFileStream(FileStream stream)
+        {
+            ParseExcelFile._unitFileStream = stream;
+        }
+
+        public static string GetUnitFileName()
+        {
+            return _unitFileName;
+        }
+
+        public static void SetUnitFileName(string fileName)
+        {
+            ParseExcelFile._unitFileName = fileName;
+        }
+
+        public static Hashtable ParseUnitFile(string fileName)
+        {
+            
+            var stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
             var unitListFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
             var result = unitListFileReader.AsDataSet();
             var dataTable = result.Tables[0];
@@ -38,7 +63,15 @@ namespace ShtatRaspisanie
             for (var i = 0; i < unitTableLenght; i++)
             {
                 var name = (string) dataTable.Rows[i][0];
-                var parent = (string) dataTable.Rows[i][1];
+                var parent = " ";
+                if (dataTable.Rows[i][1] == DBNull.Value)
+                {
+                   parent  = " ";
+                }
+                else
+                {
+                    parent = (string) dataTable.Rows[i][1];
+                }
                 dataFile.Add(name, parent);
             }
             return dataFile;
@@ -54,7 +87,7 @@ namespace ShtatRaspisanie
             if ((string) spisokPodrazdeleniyTable.Rows[0][0] != "NAME" &&
                 (string) spisokPodrazdeleniyTable.Rows[0][1] != "PARENT")
             {
-                MessageBox.Show("Выбран не корректный файл");
+                MessageBox.Show(@"Выбран не корректный файл");
                 return null;
             }
             var unitList = new List<Unit>();
@@ -123,7 +156,7 @@ namespace ShtatRaspisanie
             //    }
 
             //}
-            PodrazdelenieList = unitList;
+            //PodrazdelenieList = unitList;
         }
 
         public static void ParseSpisokPodrazdeleniyFile(FileStream stream)
@@ -165,10 +198,10 @@ Parent);
                     var shtanEdenica = new StaffUnit
                     {
                         NameOfShtatnajaEdinica = (string) spisokShtatnEdinicTable.Rows[i][0],
-                        Podr_name = (string) spisokShtatnEdinicTable.Rows[i][1],
+                        PodrName = (string) spisokShtatnEdinicTable.Rows[i][1],
                         Rate = Convert.ToInt32(spisokShtatnEdinicTable.Rows[i][2])
                     };
-                    Console.WriteLine(shtanEdenica.NameOfShtatnajaEdinica + " " + shtanEdenica.Podr_name + " " +
+                    Console.WriteLine(shtanEdenica.NameOfShtatnajaEdinica + " " + shtanEdenica.PodrName + " " +
                                       shtanEdenica.Rate);
                     shtatnEdinicaListLocal.Add(shtanEdenica);
                 }

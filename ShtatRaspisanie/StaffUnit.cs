@@ -1,6 +1,6 @@
 ﻿namespace ShtatRaspisanie
 {
-    internal class StaffUnit
+    public class StaffUnit
     {
         //Наименование штатной единицы.
         //Наименование подразделения.
@@ -10,6 +10,6 @@
 
         public int Rate { get; set; }
 
-        internal string Podr_name { get; set; }
+        internal string PodrName { get; set; }
     }
 }

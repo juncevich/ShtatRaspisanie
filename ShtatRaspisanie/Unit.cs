@@ -2,7 +2,7 @@
 
 namespace ShtatRaspisanie
 {
-    internal class Unit
+    public class Unit
     {
         //Наименование подразделения.
         public string Name { get; set; }

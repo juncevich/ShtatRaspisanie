@@ -30,7 +30,7 @@
         {
             this.SpisokPodrazdeleniyButton = new System.Windows.Forms.Button();
             this.SpisokShtatnEdinicButton = new System.Windows.Forms.Button();
-            this.openFileSpisokPodrazdeleniy = new System.Windows.Forms.OpenFileDialog();
+            this.openUnitListFile = new System.Windows.Forms.OpenFileDialog();
             this.openSpisokShtatnEdinic = new System.Windows.Forms.OpenFileDialog();
             this.shtatnoeRaspisanieButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -43,7 +43,7 @@
             this.SpisokPodrazdeleniyButton.TabIndex = 0;
             this.SpisokPodrazdeleniyButton.Text = "Выбрать список подразделений";
             this.SpisokPodrazdeleniyButton.UseVisualStyleBackColor = true;
-            this.SpisokPodrazdeleniyButton.Click += new System.EventHandler(this.SpisokPodrazdeleniyButton_Click);
+            this.SpisokPodrazdeleniyButton.Click += new System.EventHandler(this.UnitListButton_Click);
             // 
             // SpisokShtatnEdinicButton
             // 
@@ -55,10 +55,10 @@
             this.SpisokShtatnEdinicButton.UseVisualStyleBackColor = true;
             this.SpisokShtatnEdinicButton.Click += new System.EventHandler(this.SpisokShtatnEdinicButton_Click);
             // 
-            // openFileSpisokPodrazdeleniy
+            // openUnitListFile
             // 
-            this.openFileSpisokPodrazdeleniy.FileName = "openFileSpisokPodrazdeleniy";
-            this.openFileSpisokPodrazdeleniy.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            this.openUnitListFile.FileName = "openUnitListFile";
+            this.openUnitListFile.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // openSpisokShtatnEdinic
             // 
@@ -93,7 +93,7 @@
 
         private System.Windows.Forms.Button SpisokPodrazdeleniyButton;
         private System.Windows.Forms.Button SpisokShtatnEdinicButton;
-        private System.Windows.Forms.OpenFileDialog openFileSpisokPodrazdeleniy;
+        private System.Windows.Forms.OpenFileDialog openUnitListFile;
         private System.Windows.Forms.OpenFileDialog openSpisokShtatnEdinic;
         private System.Windows.Forms.Button shtatnoeRaspisanieButton;
     }
