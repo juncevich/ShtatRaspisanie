@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace ShtatRaspisanie
@@ -8,16 +10,22 @@ namespace ShtatRaspisanie
     {
         private List<Unit> _units;
 
-        public void GetAllUnits(Hashtable dataList)
+        public void GetAllUnits(DataTable dataTable)
         {
             var units = new List<Unit>();
-            foreach (DictionaryEntry value in dataList)
+            var unitTableLenght = dataTable.Rows.Count;
+            for (int i = 0; i < unitTableLenght; i++)
             {
-                var unit = new Unit();
-                unit.Name = value.Key as string;
-                unit.Parent = value.Value as string;
-                units.Add(unit);
-
+                Unit unit = new Unit();
+                unit.Name = (string)dataTable.Rows[i][0];
+                if (dataTable.Rows[i][1] == DBNull.Value)
+                {
+                    unit.Parent = " ";
+                }
+                else
+                {
+                    unit.Parent = (string)dataTable.Rows[i][1];
+                }
             }
             
             this._units = units;
@@ -32,13 +40,14 @@ namespace ShtatRaspisanie
             foreach (var unit in _units)
             {
                
-                unit.Child = FindChildren(unit);
+                unit.Child = FindChildren(unit.Name);
             }
         }
 
-        private List<Unit> FindChildren(Unit unit)
+        private List<Unit> FindChildren(string name)
         {
-            return _units.Where(localUnit => localUnit.Parent.Equals(unit.Name)).ToList();
+            return _units.Where(localUnit => localUnit.Parent.Equals(name)).ToList();
         }
+
     }
 }

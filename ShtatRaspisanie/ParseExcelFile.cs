@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Windows.Forms;
 using Excel;
@@ -45,36 +46,23 @@ namespace ShtatRaspisanie
             ParseExcelFile._unitFileName = fileName;
         }
 
-        public static Hashtable ParseUnitFile(string fileName)
+        public static DataTable ParseUnitFile(string fileName)
         {
             
             var stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
             var unitListFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
             var result = unitListFileReader.AsDataSet();
             var dataTable = result.Tables[0];
-            var unitTableLenght = dataTable.Rows.Count;
-            var dataFile = new Hashtable();
+            
+
             if ((string)dataTable.Rows[0][0] != "NAME" &&
                 (string)dataTable.Rows[0][1] != "PARENT")
             {
                 MessageBox.Show(@"Выбран не корректный файл");
                 return null;
             }
-            for (var i = 0; i < unitTableLenght; i++)
-            {
-                var name = (string) dataTable.Rows[i][0];
-                var parent = " ";
-                if (dataTable.Rows[i][1] == DBNull.Value)
-                {
-                   parent  = " ";
-                }
-                else
-                {
-                    parent = (string) dataTable.Rows[i][1];
-                }
-                dataFile.Add(name, parent);
-            }
-            return dataFile;
+            
+            return dataTable;
         }
           
         public static List<Unit> ParseParentList(FileStream stream)
