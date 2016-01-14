@@ -21,15 +21,10 @@ namespace ShtatRaspisanie
             if (openUnitListFile.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show(@"Файл со списком подразделений выбран!");
-                StaffDao staffDao = new StaffDao();
+                StaffDao staffDao = StaffDao.GetInstance();
                 staffDao.GetAllUnits(ParseExcelFile.ParseUnitFile(openUnitListFile.FileName));
                 staffDao.SetChildToUnitList();
-                // TO DO Delete.
-                //var filename = openUnitListFile.FileName;
-                //var stream = File.Open(filename, FileMode.Open, FileAccess.Read);
-                //var unitBuilder = new UnitBuilder(ParseExcelFile.ParseParentList(stream));
-                //unitBuilder.SetChildByAll();
-                //unitBuilder.DisplayUnitList();
+
             }
         }
 
@@ -45,17 +40,18 @@ namespace ShtatRaspisanie
         {
             if (openSpisokShtatnEdinic.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show("Файл со списком штатных единиц выбран!");
-                var filename = openSpisokShtatnEdinic.FileName;
-                var stream = File.Open(filename, FileMode.Open, FileAccess.Read);
-                ParseExcelFile.ParseSpisokShtatnEdinicaFile(stream);
+                MessageBox.Show(@"Файл со списком штатных единиц выбран!");
+                StaffDao staffDao = StaffDao.GetInstance();
+                staffDao.GetAllStaffUnits(ParseExcelFile.ParseStaffUnitsFile(openSpisokShtatnEdinic.FileName));
+                staffDao.init();
+
             }
         }
 
         private void shtatnoeRaspisanieButton_Click(object sender, EventArgs e)
         {
-            WriteExcelFile.WriteShtatnoeRaspisanie(ParseExcelFile.ParseSpisokPodrazdeleniyFile,
-                ParseExcelFile.ParseSpisokShtatnEdinicaFile);
+            //WriteExcelFile.WriteShtatnoeRaspisanie(ParseExcelFile.ParseSpisokPodrazdeleniyFile,
+            //    ParseExcelFile.ParseStaffUnitsFile);
         }
     }
 }

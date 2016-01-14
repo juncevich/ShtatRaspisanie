@@ -26,6 +26,8 @@ namespace ShtatRaspisanie
         public static bool IsSpisokShtatnEdinicaFileExist { get; private set; }
         private static FileStream _unitFileStream;
         private static string _unitFileName;
+
+
         public static FileStream GetUnitFileStream()
         {
             return _unitFileStream;
@@ -52,17 +54,17 @@ namespace ShtatRaspisanie
             var stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
             var unitListFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
             var result = unitListFileReader.AsDataSet();
-            var dataTable = result.Tables[0];
+            var dataUnitsTable = result.Tables[0];
             
 
-            if ((string)dataTable.Rows[0][0] != "NAME" &&
-                (string)dataTable.Rows[0][1] != "PARENT")
+            if ((string)dataUnitsTable.Rows[0][0] != "name" &&
+                (string)dataUnitsTable.Rows[0][1] != "Parent")
             {
                 MessageBox.Show(@"Выбран не корректный файл");
                 return null;
             }
             
-            return dataTable;
+            return dataUnitsTable;
         }
           
         public static List<Unit> ParseParentList(FileStream stream)
@@ -96,55 +98,6 @@ namespace ShtatRaspisanie
             }
             return unitList;
 
-            ////Список подразделений.
-            //List<Podrazdelenie> podrazdelenieListLocal = new List<Podrazdelenie>();
-            //// Перебираем содержимое файла.
-            //int i = 1;
-            //while (i < spisokPodrazdeleniyTable.Rows.Count)
-            //{
-            //    //Если поле "PARENT" равно null.
-            //    if (spisokPodrazdeleniyTable.Rows[i][1] == DBNull.Value)
-            //    {
-            //        // Создаем родителя
-            //        ParentUnit parentUnit = new ParentUnit();
-            //        //Присваиваем имя.
-            //        parentUnit.name = (string) spisokPodrazdeleniyTable.Rows[i][0];
-            //        //Указываем, что у элемента нет родителя
-            //        parentUnit.parent = " ";
-            //        i++;
-            //        while (i < spisokPodrazdeleniyTable.Rows.Count && spisokPodrazdeleniyTable.Rows[i][1] != DBNull.Value)
-            //        {
-            //            NestedUnit nestedUnit = new NestedUnit();
-            //            nestedUnit.name = (string) spisokPodrazdeleniyTable.Rows[i][0];
-            //            nestedUnit.parent = (string) spisokPodrazdeleniyTable.Rows[i][1];
-            //            parentUnit.NestedUnitList.Add(nestedUnit);
-            //            if (spisokPodrazdeleniyTable.Rows[i-1][1] != DBNull.Value  && spisokPodrazdeleniyTable.
-            //              Rows[i-1][0]== spisokPodrazdeleniyTable.Rows[i][1])
-            //            {
-            //                ParentUnit parentUnitLocal = new ParentUnit();
-            //                parentUnitLocal.name = (string) spisokPodrazdeleniyTable.Rows[i - 1][0];
-            //                parentUnitLocal.parent = parentUnit.name;
-            //                i++;
-            //                while (i < spisokPodrazdeleniyTable.Rows.Count)
-            //                {
-            //                    NestedUnit nestedUnitLocal = new NestedUnit();
-            //                    nestedUnitLocal.name = (string) spisokPodrazdeleniyTable.Rows[i][0];
-            //                    nestedUnitLocal.parent = (string) spisokPodrazdeleniyTable.Rows[i][1];
-            //                    parentUnitLocal.NestedUnitList.Add(nestedUnitLocal);
-            //                    i++;
-
-            //                }
-            //                podrazdelenieListLocal.Add(parentUnitLocal);
-            //            }
-            //            i++;
-
-            //        }
-            //        podrazdelenieListLocal.Add(parentUnit);
-
-            //    }
-
-            //}
-            //PodrazdelenieList = unitList;
         }
 
         public static void ParseSpisokPodrazdeleniyFile(FileStream stream)
@@ -173,30 +126,40 @@ Parent);
             Console.WriteLine(podrazdelenieListLocal.Count);
         }
 
-        public static void ParseSpisokShtatnEdinicaFile(FileStream stream)
+        public static DataTable ParseStaffUnitsFile(string fileName)
         {
-            var openSpisokShtatnEdinicReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-            var result = openSpisokShtatnEdinicReader.AsDataSet();
-            var spisokShtatnEdinicTable = result.Tables[0];
-            var shtatnEdinicaListLocal = new List<StaffUnit>();
-            for (var i = 1; i < spisokShtatnEdinicTable.Rows.Count; i++)
+            var stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
+            var openStaffUnitFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+            var result = openStaffUnitFileReader.AsDataSet();
+            var staffUnitListTable = result.Tables[0];
+
+            if ((string)staffUnitListTable.Rows[0][0] != "Name" &&
+                (string)staffUnitListTable.Rows[0][1] != "Podr_name" &&
+                (string)staffUnitListTable.Rows[0][1] != "RATE")
             {
-                if (spisokShtatnEdinicTable.Rows[i][1] != DBNull.Value)
+                MessageBox.Show(@"Выбран не корректный файл");
+                return null;
+            }
+
+            var shtatnEdinicaListLocal = new List<StaffUnit>();
+            for (var i = 1; i < staffUnitListTable.Rows.Count; i++)
+            {
+                if (staffUnitListTable.Rows[i][1] != DBNull.Value)
                 {
                     var shtanEdenica = new StaffUnit
                     {
-                        NameOfShtatnajaEdinica = (string) spisokShtatnEdinicTable.Rows[i][0],
-                        PodrName = (string) spisokShtatnEdinicTable.Rows[i][1],
-                        Rate = Convert.ToInt32(spisokShtatnEdinicTable.Rows[i][2])
+                        NameOfShtatnajaEdinica = (string) staffUnitListTable.Rows[i][0],
+                        PodrName = (string) staffUnitListTable.Rows[i][1],
+                        Rate = Convert.ToInt32(staffUnitListTable.Rows[i][2])
                     };
                     Console.WriteLine(shtanEdenica.NameOfShtatnajaEdinica + " " + shtanEdenica.PodrName + " " +
                                       shtanEdenica.Rate);
                     shtatnEdinicaListLocal.Add(shtanEdenica);
                 }
             }
-            ShtatnEdinicaList = shtatnEdinicaListLocal;
+            
             IsSpisokShtatnEdinicaFileExist = true;
-            Console.WriteLine(shtatnEdinicaListLocal.Count);
+            return staffUnitListTable;
         }
     }
 }

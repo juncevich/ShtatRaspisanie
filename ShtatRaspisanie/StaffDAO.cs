@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -9,38 +8,60 @@ namespace ShtatRaspisanie
     public class StaffDao
     {
         private List<Unit> _units;
+        private List<StaffUnit> _staffUnits;
+        private static StaffDao staffDao;
+        private StaffDao()
+        {
+        }
+
+        public static StaffDao GetInstance()
+        {
+            if (staffDao == null)
+            {
+                lock (typeof(StaffDao))
+                {
+                    if (staffDao == null)
+                        staffDao = new StaffDao();
+                }
+            }
+
+            return staffDao;
+        }
 
         public void GetAllUnits(DataTable dataTable)
         {
-            var units = new List<Unit>();
+            _units = new List<Unit>();
             var unitTableLenght = dataTable.Rows.Count;
-            for (int i = 0; i < unitTableLenght; i++)
+            for (int i = 1; i < unitTableLenght; i++)
             {
-                Unit unit = new Unit();
-                unit.Name = (string)dataTable.Rows[i][0];
+                var unit = new Unit();
+                unit.Name = (string) dataTable.Rows[i][0];
                 if (dataTable.Rows[i][1] == DBNull.Value)
                 {
                     unit.Parent = " ";
                 }
                 else
                 {
-                    unit.Parent = (string)dataTable.Rows[i][1];
+                    unit.Parent = (string) dataTable.Rows[i][1];
                 }
+                _units.Add(unit);
             }
+
             
-            this._units = units;
         }
 
         public void SetUnits(List<Unit> units)
         {
-            this._units = units;
+            _units = units;
         }
+
         public void SetChildToUnitList()
         {
             foreach (var unit in _units)
             {
-               
+
                 unit.Child = FindChildren(unit.Name);
+                
             }
         }
 
@@ -49,5 +70,47 @@ namespace ShtatRaspisanie
             return _units.Where(localUnit => localUnit.Parent.Equals(name)).ToList();
         }
 
+        public void GetAllStaffUnits(DataTable datatable)
+        {
+            var staffUnits = new List<StaffUnit>();
+            for (var i = 1; i < datatable.Rows.Count; i++)
+            {
+                if (datatable.Rows[i][1] != DBNull.Value)
+                {
+                    var shtanEdenica = new StaffUnit
+                    {
+                        NameOfShtatnajaEdinica = (string) datatable.Rows[i][0],
+                        PodrName = (string) datatable.Rows[i][1],
+                        Rate = Convert.ToInt32(datatable.Rows[i][2])
+                    };
+                    Console.WriteLine(shtanEdenica.NameOfShtatnajaEdinica + " " + shtanEdenica.PodrName + " " +
+                                      shtanEdenica.Rate);
+                    staffUnits.Add(shtanEdenica);
+                }
+            }
+            _staffUnits = staffUnits;
+        }
+
+        public void SetStaffUnitsToUnits(Unit unit)
+        {
+            
+            foreach (var localStaffUnit in _staffUnits)
+            {
+                if (localStaffUnit.PodrName.Equals(unit.Name))
+                {
+                    unit.StaffUnits.Add(localStaffUnit);
+
+                }
+            }
+
+        }
+
+        public void init()
+        {
+            foreach (var unit in _units)
+            {
+                SetStaffUnitsToUnits(unit);
+            }
+        }
     }
 }
