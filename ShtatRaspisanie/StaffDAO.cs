@@ -5,6 +5,8 @@ namespace ShtatRaspisanie
 {
     public class StaffDao
     {
+        
+         
         public static List<Unit> GetAllUnits(Hashtable dataList)
         {
             var units = new List<Unit>();
@@ -20,7 +22,7 @@ namespace ShtatRaspisanie
             return units;
         }
 
-        public static void SetChildToUnitList()
+        public static void SetChildToUnitList(List<Unit> units)
         {
             
         }
