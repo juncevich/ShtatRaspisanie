@@ -10,9 +10,10 @@ namespace ShtatRaspisanie
         //Родительское подразделение
         public string Parent { get; set; }
 
-        //Потомок родителя.
+        // Потомок родителя.
         public List<Unit> Child { get; set; }
-        
+        // Список штатных единиц.
+        public List<StaffUnit> StaffUnits { get; set; }
 
         public override string ToString()
         {

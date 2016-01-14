@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="NestedUnit.cs" />
     <Compile Include="ParentUnit.cs" />
+    <Compile Include="StaffDAO.cs" />
     <Compile Include="Unit.cs" />
     <Compile Include="StaffUnit.cs" />
     <Compile Include="ParseExcelFile.cs" />
