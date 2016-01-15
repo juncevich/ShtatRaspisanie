@@ -22,7 +22,7 @@ namespace ShtatRaspisanie
             {
                 MessageBox.Show(@"Файл со списком подразделений выбран!");
                 StaffDao staffDao = StaffDao.GetInstance();
-                staffDao.GetAllUnits(ParseExcelFile.ParseUnitFile(openUnitListFile.FileName));
+                staffDao.MakeAllUnits(ParseExcelFile.ParseUnitFile(openUnitListFile.FileName));
                 staffDao.SetChildToUnitList();
 
             }
@@ -42,8 +42,8 @@ namespace ShtatRaspisanie
             {
                 MessageBox.Show(@"Файл со списком штатных единиц выбран!");
                 StaffDao staffDao = StaffDao.GetInstance();
-                staffDao.GetAllStaffUnits(ParseExcelFile.ParseStaffUnitsFile(openSpisokShtatnEdinic.FileName));
-                staffDao.init();
+                staffDao.MakeAllStaffUnits(ParseExcelFile.ParseStaffUnitsFile(openSpisokShtatnEdinic.FileName));
+                staffDao.Init();
 
             }
         }

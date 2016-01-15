@@ -7,13 +7,17 @@ namespace ShtatRaspisanie
 {
     public class StaffDao
     {
+        //Список подразделений.
         private List<Unit> _units;
+        //Список штатных единиц.
         private List<StaffUnit> _staffUnits;
+        // Класс синглтон.
         private static StaffDao staffDao;
+
         private StaffDao()
         {
         }
-
+        // Получить экземпляр синглтона.
         public static StaffDao GetInstance()
         {
             if (staffDao == null)
@@ -27,9 +31,10 @@ namespace ShtatRaspisanie
 
             return staffDao;
         }
-
-        public void GetAllUnits(DataTable dataTable)
+        // Создать список подразделений. 
+        public void MakeAllUnits(DataTable dataTable)
         {
+
             _units = new List<Unit>();
             var unitTableLenght = dataTable.Rows.Count;
             for (int i = 1; i < unitTableLenght; i++)
@@ -70,9 +75,10 @@ namespace ShtatRaspisanie
             return _units.Where(localUnit => localUnit.Parent.Equals(name)).ToList();
         }
 
-        public void GetAllStaffUnits(DataTable datatable)
+        public void MakeAllStaffUnits(DataTable datatable)
         {
             var staffUnits = new List<StaffUnit>();
+
             for (var i = 1; i < datatable.Rows.Count; i++)
             {
                 if (datatable.Rows[i][1] != DBNull.Value)
@@ -105,7 +111,7 @@ namespace ShtatRaspisanie
 
         }
 
-        public void init()
+        public void Init()
         {
             foreach (var unit in _units)
             {
