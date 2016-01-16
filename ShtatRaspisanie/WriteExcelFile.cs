@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
+using ShtatRaspisanie.DataReader;
 
 namespace ShtatRaspisanie
 {
@@ -12,12 +13,12 @@ namespace ShtatRaspisanie
         internal static void WriteShtatnoeRaspisanie(Action<FileStream> parseSpisokPodrazdeleniyFile,
             Action<FileStream> parseSpisokShtatnEdinicaFile)
         {
-            if (ParseExcelFile.IsSpisokShtatnEdinicaFileExist && ParseExcelFile.IsSpisokPodrazdeleniyFileExist)
+            if (ExcelParser.IsSpisokShtatnEdinicaFileExist && ExcelParser.IsSpisokPodrazdeleniyFileExist)
             {
                 //Получаем список подразделений из файла.
-                var podrazdelenieList = ParseExcelFile.PodrazdelenieList;
+                var podrazdelenieList = ExcelParser.PodrazdelenieList;
                 //Получаем список штатных единиц из файла.
-                var shtatnEdinicaList = ParseExcelFile.ShtatnEdinicaList;
+                var shtatnEdinicaList = ExcelParser.ShtatnEdinicaList;
                 //Начинаем перебор в уникальном списке подразделений
                 foreach (var uniqParent in podrazdelenieList)
                 {

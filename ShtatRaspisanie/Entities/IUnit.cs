@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Office2010.Excel;
+﻿using System.Data;
+using DocumentFormat.OpenXml.Office2010.Excel;
 
 namespace ShtatRaspisanie.Entities
 {
