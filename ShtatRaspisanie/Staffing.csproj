@@ -51,7 +51,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataReader\AbstractExcelParser.cs" />
     <Compile Include="DataReader\IParser.cs" />
     <Compile Include="Entities\IStaffUnit.cs" />
     <Compile Include="Entities\IUnit.cs" />

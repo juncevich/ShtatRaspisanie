@@ -22,8 +22,9 @@ namespace ShtatRaspisanie
             if (openUnitListFile.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show(@"Файл со списком подразделений выбран!");
+                ExcelParser parser = new ExcelParser();
                 StaffDao staffDao = StaffDao.GetInstance();
-                staffDao.MakeAllUnits(ExcelParser.ParseUnitFile(openUnitListFile.FileName));
+                staffDao.MakeAllUnits(parser.GetUnitList(openUnitListFile.FileName));
                 staffDao.SetChildToUnitList();
 
             }
@@ -39,12 +40,13 @@ namespace ShtatRaspisanie
 
         private void SpisokShtatnEdinicButton_Click(object sender, EventArgs e)
         {
-            if (openSpisokShtatnEdinic.ShowDialog() == DialogResult.OK)
+            if (openStaffUnitListFile.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show(@"Файл со списком штатных единиц выбран!");
+                ExcelParser parser = new ExcelParser();
                 StaffDao staffDao = StaffDao.GetInstance();
-                staffDao.MakeAllStaffUnits(ExcelParser.ParseStaffUnitsFile(openSpisokShtatnEdinic.FileName));
-                staffDao.Init();
+                //staffDao.MakeAllStaffUnits(parser.GetStaffUnitList(openStaffUnitListFile.FileName));
+                //staffDao.Init();
 
             }
         }

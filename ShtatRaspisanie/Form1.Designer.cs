@@ -31,7 +31,7 @@
             this.SpisokPodrazdeleniyButton = new System.Windows.Forms.Button();
             this.SpisokShtatnEdinicButton = new System.Windows.Forms.Button();
             this.openUnitListFile = new System.Windows.Forms.OpenFileDialog();
-            this.openSpisokShtatnEdinic = new System.Windows.Forms.OpenFileDialog();
+            this.openStaffUnitListFile = new System.Windows.Forms.OpenFileDialog();
             this.shtatnoeRaspisanieButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -60,10 +60,10 @@
             this.openUnitListFile.FileName = "openUnitListFile";
             this.openUnitListFile.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
-            // openSpisokShtatnEdinic
+            // openStaffUnitListFile
             // 
-            this.openSpisokShtatnEdinic.FileName = "openSpisokShtatnEdinic";
-            this.openSpisokShtatnEdinic.FileOk += new System.ComponentModel.CancelEventHandler(this.openSpisokShtatnEdinic_FileOk);
+            this.openStaffUnitListFile.FileName = "openStaffUnitListFile";
+            this.openStaffUnitListFile.FileOk += new System.ComponentModel.CancelEventHandler(this.openSpisokShtatnEdinic_FileOk);
             // 
             // shtatnoeRaspisanieButton
             // 
@@ -94,7 +94,7 @@
         private System.Windows.Forms.Button SpisokPodrazdeleniyButton;
         private System.Windows.Forms.Button SpisokShtatnEdinicButton;
         private System.Windows.Forms.OpenFileDialog openUnitListFile;
-        private System.Windows.Forms.OpenFileDialog openSpisokShtatnEdinic;
+        private System.Windows.Forms.OpenFileDialog openStaffUnitListFile;
         private System.Windows.Forms.Button shtatnoeRaspisanieButton;
     }
 }

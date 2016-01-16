@@ -14,6 +14,10 @@
             Rate = rate;
         }
 
+        public StaffUnit()
+        {
+        }
+
         public void DisplayStaffUnit()
         {
             System.Console.WriteLine(Name + " " + PodrName + " " + Rate);

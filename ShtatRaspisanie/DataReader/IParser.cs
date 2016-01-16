@@ -5,7 +5,7 @@ namespace ShtatRaspisanie.DataReader
     public interface IParser
     {
         DataTable GetUnitList();
-        DataTable GetStuffUnitList();
+        DataTable GetStaffUnitList();
 
     }
 }

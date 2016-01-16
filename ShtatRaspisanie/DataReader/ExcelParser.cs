@@ -9,10 +9,10 @@ using ShtatRaspisanie.Entities;
 namespace ShtatRaspisanie.DataReader
 {
     //Класс, который считывает xlsx файл и разбирает его на объекты.
-    public class ExcelParser:AbstractExcelParser
+    public class ExcelParser:IParser
     {
 
-        public override DataTable GetUnitList(string fileName)
+        public DataTable GetUnitList(string fileName)
         {
             var stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
             var unitListFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
@@ -30,17 +30,17 @@ namespace ShtatRaspisanie.DataReader
             return dataUnitsTable;
         }
 
-        public override DataTable GetUnitList()
+        public DataTable GetUnitList()
         {
             throw new NotImplementedException();
         }
 
-        public override DataTable GetStuffUnitList()
+        public DataTable GetStaffUnitList()
         {
             throw new NotImplementedException();
         }
 
-        public override List<StaffUnit> GetStuffUnitList(string fileName)
+        public List<StaffUnit> GetStaffUnitList(string fileName)
         {
             var stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
             var openStaffUnitFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
@@ -60,15 +60,15 @@ namespace ShtatRaspisanie.DataReader
             {
                 if (staffUnitListTable.Rows[i][1] != DBNull.Value)
                 {
-                    var shtanEdenica = new StaffUnit
+                    var staffUnit = new StaffUnit();
                     {
-                        Name = (string)staffUnitListTable.Rows[i][0],
-                        PodrName = (string)staffUnitListTable.Rows[i][1],
-                        Rate = Convert.ToInt32(staffUnitListTable.Rows[i][2])
+                        staffUnit.Name = (string) staffUnitListTable.Rows[i][0];
+                        staffUnit.PodrName = (string) staffUnitListTable.Rows[i][1];
+                        staffUnit.Rate = Convert.ToInt32(staffUnitListTable.Rows[i][2]);
                     };
-                    Console.WriteLine(shtanEdenica.Name + " " + shtanEdenica.PodrName + " " +
-                                      shtanEdenica.Rate);
-                    staffUnits.Add(shtanEdenica);
+                    Console.WriteLine(staffUnit.Name + " " + staffUnit.PodrName + " " +
+                                      staffUnit.Rate);
+                    staffUnits.Add(staffUnit);
                 }
             }
 
