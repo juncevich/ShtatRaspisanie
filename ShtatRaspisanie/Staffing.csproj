@@ -56,6 +56,8 @@
     <Compile Include="Entities\IUnit.cs" />
     <Compile Include="Entities\UnitWithOneNestedGrade.cs" />
     <Compile Include="Entities\UnitWithTwoNestedGrade.cs" />
+    <Compile Include="Handlers\DataHandler.cs" />
+    <Compile Include="Handlers\IDataHandler.cs" />
     <Compile Include="StaffDAO.cs" />
     <Compile Include="Entities\Unit.cs" />
     <Compile Include="Entities\StaffUnit.cs" />
