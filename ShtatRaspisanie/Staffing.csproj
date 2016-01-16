@@ -51,6 +51,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\IUnit.cs" />
     <Compile Include="NestedUnit.cs" />
     <Compile Include="ParentUnit.cs" />
     <Compile Include="StaffDAO.cs" />
