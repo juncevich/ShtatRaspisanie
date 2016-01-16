@@ -53,14 +53,14 @@
   <ItemGroup>
     <Compile Include="DataReader\AbstractExcelParser.cs" />
     <Compile Include="DataReader\IParser.cs" />
-    <Compile Include="Entities\AbstractStaffUnit.cs" />
-    <Compile Include="Entities\AbstractUnit.cs" />
     <Compile Include="Entities\IStaffUnit.cs" />
     <Compile Include="Entities\IUnit.cs" />
+    <Compile Include="Entities\UnitWithOneNestedGrade.cs" />
+    <Compile Include="Entities\UnitWithTwoNestedGrade.cs" />
     <Compile Include="StaffDAO.cs" />
     <Compile Include="Entities\Unit.cs" />
     <Compile Include="Entities\StaffUnit.cs" />
-    <Compile Include="DataReader\ParseExcelFil.cs" />
+    <Compile Include="DataReader\ExcelParser.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

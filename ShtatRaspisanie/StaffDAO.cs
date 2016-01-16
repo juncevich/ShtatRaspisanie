@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using ShtatRaspisanie.Entities;
 
 namespace ShtatRaspisanie
 {
@@ -85,11 +86,11 @@ namespace ShtatRaspisanie
                 {
                     var shtanEdenica = new StaffUnit
                     {
-                        NameOfShtatnajaEdinica = (string) datatable.Rows[i][0],
+                        Name = (string) datatable.Rows[i][0],
                         PodrName = (string) datatable.Rows[i][1],
                         Rate = Convert.ToInt32(datatable.Rows[i][2])
                     };
-                    Console.WriteLine(shtanEdenica.NameOfShtatnajaEdinica + " " + shtanEdenica.PodrName + " " +
+                    Console.WriteLine(shtanEdenica.Name + " " + shtanEdenica.PodrName + " " +
                                       shtanEdenica.Rate);
                     staffUnits.Add(shtanEdenica);
                 }

@@ -1,13 +1,16 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
+using ShtatRaspisanie.Entities;
 
 namespace ShtatRaspisanie.DataReader
 {
     public abstract class AbstractExcelParser:IParser
     {
-        public abstract DataTable GetUnitData(string filename);
-        public abstract DataTable GetUnitData();
+        public abstract DataTable GetUnitList(string fileName);
+        public abstract DataTable GetUnitList();
 
-        public abstract DataTable GetStuffUnitData();
+        public abstract List<StaffUnit> GetStuffUnitList(string fileName);
+        public abstract DataTable GetStuffUnitList();
 
     }
 }

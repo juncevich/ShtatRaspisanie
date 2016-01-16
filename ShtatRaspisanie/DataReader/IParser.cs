@@ -4,8 +4,8 @@ namespace ShtatRaspisanie.DataReader
 {
     public interface IParser
     {
-        DataTable GetUnitData();
-        DataTable GetStuffUnitData();
+        DataTable GetUnitList();
+        DataTable GetStuffUnitList();
 
     }
 }

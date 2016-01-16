@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ShtatRaspisanie.Entities;
 
 namespace ShtatRaspisanie
 {
@@ -17,7 +18,7 @@ namespace ShtatRaspisanie
 
         public override string ToString()
         {
-            string view = Name + " " + Parent;
+            var view = Name + " " + Parent;
             return view;
         }
     }

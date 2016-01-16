@@ -1,15 +1,24 @@
-﻿namespace ShtatRaspisanie
+﻿namespace ShtatRaspisanie.Entities
 {
-    public class StaffUnit
+    public class StaffUnit:IStaffUnit
     {
-        //Наименование штатной единицы.
-        //Наименование подразделения.
-        //Кол-во ставок.
+        public  string Name { get; set; }
+        public  string PodrName { get; set; }
+        public  int Rate { get; set; }
+        
 
-        public string NameOfShtatnajaEdinica { get; set; }
+        public StaffUnit(string name, string podrName, int rate)
+        {
+            Name = name;
+            PodrName = podrName;
+            Rate = rate;
+        }
 
-        public int Rate { get; set; }
+        public void DisplayStaffUnit()
+        {
+            System.Console.WriteLine(Name + " " + PodrName + " " + Rate);
+        }
 
-        internal string PodrName { get; set; }
+
     }
 }
