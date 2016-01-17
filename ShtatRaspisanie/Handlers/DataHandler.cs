@@ -1,5 +1,6 @@
 ﻿using ShtatRaspisanie.Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 
@@ -11,55 +12,26 @@ namespace ShtatRaspisanie.Handlers
         {
         }
 
-        public List<IUnit> HandleUnitTable(DataTable dataTable)
+        public List<IUnit> HandleUnitTable(Hashtable hashtable)
         {
-            int index = 0;
+            var index = 0;
             var units = new List<IUnit>();
-            var unitTableLenght = dataTable.Rows.Count;
-
-            // Перечисление всего спискка, пока поле name не пустое.
-            while (dataTable.Rows[index][0] != DBNull.Value)
+            string parentName = "";
+            foreach (DictionaryEntry item in hashtable)
             {
-                int tempIndex = index;
-                bool simple = true;
-
-                if (dataTable.Rows[index][1] == DBNull.Value)
+                if (item.Value.Equals(""))
                 {
-                    while (dataTable.Rows[tempIndex][1] != DBNull.Value)
-                    {
-                        if (dataTable.Rows[index][1] == dataTable.Rows[index - 1][0])
-                        {
-                            simple = false;
-                        }
-                        tempIndex++;
-                    }
-
-                    // Заполняем простое подразделение
-                    if (simple == true)
-                    {
-                        string name = (string)dataTable.Rows[index][1];
-                        string parent = "";
-                        IUnit unit = new UnitWithOneNestedGrade(name, parent);
-
-                        while (dataTable.Rows[index][1] == DBNull.Value)
-                        {
-                            name = (string)dataTable.Rows[index][0];
-                            parent = (string)dataTable.Rows[index][1];
-                            IUnit childUnit = new UnitWithOneNestedGrade(name, parent);
-                            unit.Child.Add(childUnit);
-                            index++;
-                        }
-                        units.Add(unit);
-                    }
-
-                    if (simple == false)
-                    {
-                        string name = (string)dataTable.Rows[index][1];
-                        string parent = "";
-                        IUnit unit = new UnitWithTwoNestedGrade(name, parent);
-                    }
+                    var parentUnit = new ParentUnit();
+                    parentUnit.Name = (string)item.Key;
+                    parentName = (string)item.Key;
+                } else if (item.Value.Equals(parentName))
+                {
+                    
                 }
-            }
+
+                
+            }    
+            
 
             //for (var i = 1; i < unitTableLenght; i++)
             //{

@@ -2,31 +2,43 @@
 using Excel.Core.OpenXmlFormat;
 using ShtatRaspisanie.Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Windows.Forms;
+using ClosedXML.Excel;
 
 namespace ShtatRaspisanie.DataReader
 {
     //Класс, который считывает xlsx файл и разбирает его на объекты.
     public class ExcelParser : IParser
     {
-        public DataTable GetUnitList(string fileName)
+        public Hashtable GetUnitList(string fileName)
         {
-            FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
-            IExcelDataReader unitListFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-            var result = unitListFileReader.AsDataSet();
-            var dataUnitsTable = result.Tables[0];
+            var workbook = new XLWorkbook(fileName);
+            var workSheet = workbook.Worksheet(1);
+            var firstRowUsed = workSheet.FirstRowUsed();
+            var categoryRow = firstRowUsed.RowUsed();
+            
+            categoryRow = categoryRow.RowBelow();
+            ArrayList unitsArrayList = new ArrayList();
 
-            if ((string)dataUnitsTable.Rows[0][0] != "name" &&
-                (string)dataUnitsTable.Rows[0][1] != "Parent")
+            DataTable dataUnitsTable = new DataTable();
+            Hashtable hashtable = new Hashtable();
+            while (!categoryRow.Cell(1).IsEmpty())
             {
-                MessageBox.Show(@"Выбран не корректный файл");
-                return null;
+                
+                var name = categoryRow.Cell(1).GetString();
+                var parent = categoryRow.Cell(2).GetString();
+                hashtable.Add(name,parent);
+                categoryRow = categoryRow.RowBelow();
+                
             }
 
-            return dataUnitsTable;
+           
+
+            return hashtable;
         }
 
         public DataTable GetUnitList()

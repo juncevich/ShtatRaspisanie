@@ -26,10 +26,7 @@ namespace ShtatRaspisanie
                 MessageBox.Show(@"Файл со списком подразделений выбран!");
                 var dataHandler = new DataHandler();
                 ExcelParser parser = new ExcelParser();
-                //parser.GetUnitList(openUnitListFile.FileName);
-                FileStream stream = File.Open(openUnitListFile.FileName, FileMode.Open, FileAccess.Read);
-                var unitListFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-                //dataHandler.HandleUnitTable(new ExcelParser().GetUnitList());
+                dataHandler.HandleUnitTable(new ExcelParser().GetUnitList(openUnitListFile.FileName));
                 //StaffDao staffDao = StaffDao.GetInstance();
                 //staffDao.MakeAllUnits(parser.GetUnitList(openUnitListFile.FileName));
                 //staffDao.SetChildToUnitList();

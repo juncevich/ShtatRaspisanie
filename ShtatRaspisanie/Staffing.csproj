@@ -61,6 +61,7 @@
     <Compile Include="DataReader\IParser.cs" />
     <Compile Include="Entities\IStaffUnit.cs" />
     <Compile Include="Entities\IUnit.cs" />
+    <Compile Include="Entities\ParentUnit.cs" />
     <Compile Include="Entities\UnitWithOneNestedGrade.cs" />
     <Compile Include="Entities\UnitWithTwoNestedGrade.cs" />
     <Compile Include="Handlers\DataHandler.cs" />
