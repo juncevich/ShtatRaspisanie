@@ -14,7 +14,7 @@ namespace ShtatRaspisanie.DataReader
 
         public DataTable GetUnitList(string fileName)
         {
-            var stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
+            FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
             var unitListFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
             var result = unitListFileReader.AsDataSet();
             var dataUnitsTable = result.Tables[0];

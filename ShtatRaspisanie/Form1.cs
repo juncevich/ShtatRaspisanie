@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 using ShtatRaspisanie.DataReader;
+using ShtatRaspisanie.Handlers;
 
 namespace ShtatRaspisanie
 {
@@ -22,10 +23,11 @@ namespace ShtatRaspisanie
             if (openUnitListFile.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show(@"Файл со списком подразделений выбран!");
-                ExcelParser parser = new ExcelParser();
-                StaffDao staffDao = StaffDao.GetInstance();
-                staffDao.MakeAllUnits(parser.GetUnitList(openUnitListFile.FileName));
-                staffDao.SetChildToUnitList();
+                var dataHandler = new DataHandler(); 
+                dataHandler.HandleUnitTable(new ExcelParser().GetUnitList(openUnitListFile.FileName));
+                //StaffDao staffDao = StaffDao.GetInstance();
+                //staffDao.MakeAllUnits(parser.GetUnitList(openUnitListFile.FileName));
+                //staffDao.SetChildToUnitList();
 
             }
         }
@@ -44,7 +46,8 @@ namespace ShtatRaspisanie
             {
                 MessageBox.Show(@"Файл со списком штатных единиц выбран!");
                 ExcelParser parser = new ExcelParser();
-                StaffDao staffDao = StaffDao.GetInstance();
+                parser.GetStaffUnitList(openStaffUnitListFile.FileName);
+                //StaffDao staffDao = StaffDao.GetInstance();
                 //staffDao.MakeAllStaffUnits(parser.GetStaffUnitList(openStaffUnitListFile.FileName));
                 //staffDao.Init();
 
