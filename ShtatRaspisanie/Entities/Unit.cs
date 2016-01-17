@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using ShtatRaspisanie.Entities;
+﻿using ShtatRaspisanie.Entities;
+using System.Collections.Generic;
 
 namespace ShtatRaspisanie
 {
@@ -13,6 +13,7 @@ namespace ShtatRaspisanie
 
         // Потомок родителя.
         public List<Unit> Child { get; set; }
+
         // Список штатных единиц.
         public List<StaffUnit> StaffUnits { get; set; }
 

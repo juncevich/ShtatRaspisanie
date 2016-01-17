@@ -1,14 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Windows.Forms;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
-using ShtatRaspisanie.DataReader;
-
-namespace ShtatRaspisanie
+﻿namespace ShtatRaspisanie
 {
-//    internal class WriteExcelFile
+    //    internal class WriteExcelFile
     //{
     //    internal static void WriteShtatnoeRaspisanie(Action<FileStream> parseSpisokPodrazdeleniyFile,
     //        Action<FileStream> parseSpisokShtatnEdinicaFile)

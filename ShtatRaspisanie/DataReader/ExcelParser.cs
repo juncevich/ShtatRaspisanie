@@ -1,24 +1,23 @@
-﻿using System;
+﻿using Excel;
+using Excel.Core.OpenXmlFormat;
+using ShtatRaspisanie.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Windows.Forms;
-using Excel;
-using ShtatRaspisanie.Entities;
 
 namespace ShtatRaspisanie.DataReader
 {
     //Класс, который считывает xlsx файл и разбирает его на объекты.
-    public class ExcelParser:IParser
+    public class ExcelParser : IParser
     {
-
         public DataTable GetUnitList(string fileName)
         {
             FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
-            var unitListFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+            IExcelDataReader unitListFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
             var result = unitListFileReader.AsDataSet();
             var dataUnitsTable = result.Tables[0];
-
 
             if ((string)dataUnitsTable.Rows[0][0] != "name" &&
                 (string)dataUnitsTable.Rows[0][1] != "Parent")
@@ -46,7 +45,7 @@ namespace ShtatRaspisanie.DataReader
             var openStaffUnitFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
             var result = openStaffUnitFileReader.AsDataSet();
             var staffUnitListTable = result.Tables[0];
-            
+
             if ((string)staffUnitListTable.Rows[0][0] != "Name" &&
                 (string)staffUnitListTable.Rows[0][1] != "Podr_name" &&
                 (string)staffUnitListTable.Rows[0][1] != "RATE")
@@ -62,8 +61,8 @@ namespace ShtatRaspisanie.DataReader
                 {
                     var staffUnit = new StaffUnit();
                     {
-                        staffUnit.Name = (string) staffUnitListTable.Rows[i][0];
-                        staffUnit.PodrName = (string) staffUnitListTable.Rows[i][1];
+                        staffUnit.Name = (string)staffUnitListTable.Rows[i][0];
+                        staffUnit.PodrName = (string)staffUnitListTable.Rows[i][1];
                         staffUnit.Rate = Convert.ToInt32(staffUnitListTable.Rows[i][2]);
                     };
                     Console.WriteLine(staffUnit.Name + " " + staffUnit.PodrName + " " +
@@ -71,7 +70,6 @@ namespace ShtatRaspisanie.DataReader
                     staffUnits.Add(staffUnit);
                 }
             }
-
 
             return staffUnits;
         }

@@ -1,32 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing.Text;
 using System.Linq;
-using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace ShtatRaspisanie.Entities
 {
-    public sealed class UnitWithOneNestedGrade:IUnit
+    public sealed class UnitWithOneNestedGrade : IUnit
     {
-
         public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
+
         public string Parent
         {
             get { return _parent; }
             set { _parent = value; }
         }
+
         public List<IUnit> Child
         {
             get { return _child; }
             set { _child = value; }
         }
-        public List<IStaffUnit> StaffUnits
-        { 
 
+        public List<IStaffUnit> StaffUnits
+        {
             get { return _staffUnits; }
             set { _staffUnits = value; }
         }
@@ -36,6 +35,7 @@ namespace ShtatRaspisanie.Entities
             get { return _childStaffUnits; }
             set { _childStaffUnits = value; }
         }
+
         private string _name;
         private string _parent;
         private List<IUnit> _child;
@@ -44,7 +44,6 @@ namespace ShtatRaspisanie.Entities
 
         public void InitUnit()
         {
-
         }
 
         public UnitWithOneNestedGrade(string name, string parent)
@@ -61,7 +60,7 @@ namespace ShtatRaspisanie.Entities
         }
 
         public UnitWithOneNestedGrade(string name, string parent, List<IUnit> child, List<IStaffUnit> staffUnits)
-        {   
+        {
             _name = name;
             _parent = parent;
             _child = child;
@@ -80,7 +79,6 @@ namespace ShtatRaspisanie.Entities
 
         public void DisplayUnit()
         {
-           
             Console.WriteLine(Name + " " + Parent);
             foreach (var staffUnit in StaffUnits)
             {
@@ -96,7 +94,5 @@ namespace ShtatRaspisanie.Entities
                 }
             }
         }
-
-
     }
 }

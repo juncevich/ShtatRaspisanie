@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ShtatRaspisanie.DataReader;
+using ShtatRaspisanie.Handlers;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
-using ShtatRaspisanie.DataReader;
-using ShtatRaspisanie.Handlers;
+using Excel;
 
 namespace ShtatRaspisanie
 {
@@ -23,12 +24,15 @@ namespace ShtatRaspisanie
             if (openUnitListFile.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show(@"Файл со списком подразделений выбран!");
-                var dataHandler = new DataHandler(); 
-                dataHandler.HandleUnitTable(new ExcelParser().GetUnitList(openUnitListFile.FileName));
+                var dataHandler = new DataHandler();
+                ExcelParser parser = new ExcelParser();
+                //parser.GetUnitList(openUnitListFile.FileName);
+                FileStream stream = File.Open(openUnitListFile.FileName, FileMode.Open, FileAccess.Read);
+                var unitListFileReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                //dataHandler.HandleUnitTable(new ExcelParser().GetUnitList());
                 //StaffDao staffDao = StaffDao.GetInstance();
                 //staffDao.MakeAllUnits(parser.GetUnitList(openUnitListFile.FileName));
                 //staffDao.SetChildToUnitList();
-
             }
         }
 
@@ -50,7 +54,6 @@ namespace ShtatRaspisanie
                 //StaffDao staffDao = StaffDao.GetInstance();
                 //staffDao.MakeAllStaffUnits(parser.GetStaffUnitList(openStaffUnitListFile.FileName));
                 //staffDao.Init();
-
             }
         }
 

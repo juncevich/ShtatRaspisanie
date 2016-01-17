@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ShtatRaspisanie.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using ShtatRaspisanie.Entities;
 
 namespace ShtatRaspisanie
 {
@@ -10,14 +10,17 @@ namespace ShtatRaspisanie
     {
         //Список подразделений.
         private List<Unit> _units;
+
         //Список штатных единиц.
         private List<StaffUnit> _staffUnits;
+
         // Класс синглтон.
         private static StaffDao staffDao;
 
         private StaffDao()
         {
         }
+
         // Получить экземпляр синглтона.
         public static StaffDao GetInstance()
         {
@@ -32,28 +35,26 @@ namespace ShtatRaspisanie
 
             return staffDao;
         }
-        // Создать список подразделений. 
+
+        // Создать список подразделений.
         public void MakeAllUnits(DataTable dataTable)
         {
-
             _units = new List<Unit>();
             var unitTableLenght = dataTable.Rows.Count;
             for (int i = 1; i < unitTableLenght; i++)
             {
                 var unit = new Unit();
-                unit.Name = (string) dataTable.Rows[i][0];
+                unit.Name = (string)dataTable.Rows[i][0];
                 if (dataTable.Rows[i][1] == DBNull.Value)
                 {
                     unit.Parent = " ";
                 }
                 else
                 {
-                    unit.Parent = (string) dataTable.Rows[i][1];
+                    unit.Parent = (string)dataTable.Rows[i][1];
                 }
                 _units.Add(unit);
             }
-
-            
         }
 
         public void SetUnits(List<Unit> units)
@@ -65,9 +66,7 @@ namespace ShtatRaspisanie
         {
             foreach (var unit in _units)
             {
-
                 unit.Child = FindChildren(unit.Name);
-                
             }
         }
 
@@ -86,8 +85,8 @@ namespace ShtatRaspisanie
                 {
                     var shtanEdenica = new StaffUnit
                     {
-                        Name = (string) datatable.Rows[i][0],
-                        PodrName = (string) datatable.Rows[i][1],
+                        Name = (string)datatable.Rows[i][0],
+                        PodrName = (string)datatable.Rows[i][1],
                         Rate = Convert.ToInt32(datatable.Rows[i][2])
                     };
                     Console.WriteLine(shtanEdenica.Name + " " + shtanEdenica.PodrName + " " +
@@ -100,16 +99,13 @@ namespace ShtatRaspisanie
 
         public void SetStaffUnitsToUnits(Unit unit)
         {
-            
             foreach (var localStaffUnit in _staffUnits)
             {
                 if (localStaffUnit.PodrName.Equals(unit.Name))
                 {
                     unit.StaffUnits.Add(localStaffUnit);
-
                 }
             }
-
         }
 
         public void Init()

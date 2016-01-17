@@ -4,27 +4,28 @@ using System.Linq;
 
 namespace ShtatRaspisanie.Entities
 {
-    public class UnitWithTwoNestedGrade:IUnit
+    public class UnitWithTwoNestedGrade : IUnit
     {
-
         public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
+
         public string Parent
         {
             get { return _parent; }
             set { _parent = value; }
         }
+
         public List<IUnit> Child
         {
             get { return _child; }
             set { _child = value; }
         }
+
         public List<IStaffUnit> StaffUnits
         {
-
             get { return _staffUnits; }
             set { _staffUnits = value; }
         }
@@ -34,6 +35,7 @@ namespace ShtatRaspisanie.Entities
             get { return _childStaffUnits; }
             set { _childStaffUnits = value; }
         }
+
         private string _name;
         private string _parent;
         private List<IUnit> _child;
@@ -42,7 +44,6 @@ namespace ShtatRaspisanie.Entities
 
         public void InitUnit()
         {
-
         }
 
         public UnitWithTwoNestedGrade(string name, string parent)
@@ -78,7 +79,6 @@ namespace ShtatRaspisanie.Entities
 
         public void DisplayUnit()
         {
-
             Console.WriteLine(Name + " " + Parent);
             foreach (var staffUnit in StaffUnits)
             {
@@ -94,7 +94,5 @@ namespace ShtatRaspisanie.Entities
                 }
             }
         }
-
-
     }
 }

@@ -39,7 +39,7 @@ namespace ShtatRaspisanie
                 foreach (var child in parent.Child)
                 {
                     Console.WriteLine(child);
-                    if (child.Child !=null)
+                    if (child.Child != null)
                     {
                         foreach (var nestedChild in child.Child)
                         {
@@ -47,10 +47,10 @@ namespace ShtatRaspisanie
                         }
                     }
                 }
-//                foreach (var child in parentList.Where(item => item.parent == parent.name).SelectMany(item => item.child))
-//                {
-//                    Console.WriteLine(child.name + " " + child.parent);
-//                }
+                //                foreach (var child in parentList.Where(item => item.parent == parent.name).SelectMany(item => item.child))
+                //                {
+                //                    Console.WriteLine(child.name + " " + child.parent);
+                //                }
             }
         }
     }
