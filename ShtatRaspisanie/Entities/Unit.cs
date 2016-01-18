@@ -14,7 +14,7 @@ namespace ShtatRaspisanie
         // Потомок родителя.
         public List<Unit> Child { get; set; }
 
-        // Список штатных единиц.
+        // Список штатных единиц .
         public List<StaffUnit> StaffUnits { get; set; }
 
         public Unit()
