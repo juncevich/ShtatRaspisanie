@@ -17,6 +17,12 @@ namespace ShtatRaspisanie
         // Список штатных единиц.
         public List<StaffUnit> StaffUnits { get; set; }
 
+        public Unit()
+        {
+            Child = new List<Unit>();
+            StaffUnits = new List<StaffUnit>();
+        }
+
         public override string ToString()
         {
             var view = Name + " " + Parent;

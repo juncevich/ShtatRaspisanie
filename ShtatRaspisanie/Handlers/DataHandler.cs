@@ -18,7 +18,7 @@ namespace ShtatRaspisanie.Handlers
             ParentUnit parentUnitMain = new ParentUnit();
             parentUnitMain.Name = "";
             parentUnitMain.Parent = "";
-            Unit lastItem = null;
+            Unit lastItem = new Unit();
             var index = 0;
             var units = new ArrayList();
             string parentName = "";
@@ -42,12 +42,12 @@ namespace ShtatRaspisanie.Handlers
                     unit.Parent = (string)item.Parent;
                     parentUnitMain.Child.Add(unit);
                     lastItem = unit;
-                }
-                //else if (!ReferenceEquals(item.Value, "") && lastItem != null && ReferenceEquals(item.Value, lastItem.Name))
-                //{
-                //    Unit unit = new Unit();
+                } else if (!ReferenceEquals(item.Parent, "") && lastItem != null && ReferenceEquals(item.Parent, lastItem.Name))
+                {
+                    lastItem.Child.Add(item);
+                    Unit unit = new Unit();
 
-                //}
+                }
             }
 
             //for (var i = 1; i < unitTableLenght; i++)
