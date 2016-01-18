@@ -1,5 +1,5 @@
-﻿using Excel;
-using Excel.Core.OpenXmlFormat;
+﻿using ClosedXML.Excel;
+using Excel;
 using ShtatRaspisanie.Entities;
 using System;
 using System.Collections;
@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Windows.Forms;
-using ClosedXML.Excel;
 
 namespace ShtatRaspisanie.DataReader
 {
@@ -20,7 +19,7 @@ namespace ShtatRaspisanie.DataReader
             var workSheet = workbook.Worksheet(1);
             var firstRowUsed = workSheet.FirstRowUsed();
             var categoryRow = firstRowUsed.RowUsed();
-            
+
             categoryRow = categoryRow.RowBelow();
             ArrayList unitsArrayList = new ArrayList();
 
@@ -28,15 +27,11 @@ namespace ShtatRaspisanie.DataReader
             Hashtable hashtable = new Hashtable();
             while (!categoryRow.Cell(1).IsEmpty())
             {
-                
                 var name = categoryRow.Cell(1).GetString();
                 var parent = categoryRow.Cell(2).GetString();
-                hashtable.Add(name,parent);
+                hashtable.Add(name, parent);
                 categoryRow = categoryRow.RowBelow();
-                
             }
-
-           
 
             return hashtable;
         }

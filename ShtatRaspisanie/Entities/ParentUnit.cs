@@ -7,6 +7,9 @@ namespace ShtatRaspisanie.Entities
         //Наименование подразделения.
         public string Name { get; set; }
 
+        //Наименование предка.
+        public string Parent { get; set; }
+
         // Потомок родителя.
         public List<Unit> Child { get; set; }
 

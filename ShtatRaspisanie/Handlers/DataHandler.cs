@@ -1,8 +1,8 @@
 ﻿using ShtatRaspisanie.Entities;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace ShtatRaspisanie.Handlers
 {
@@ -12,26 +12,42 @@ namespace ShtatRaspisanie.Handlers
         {
         }
 
-        public List<IUnit> HandleUnitTable(Hashtable hashtable)
+        public ArrayList HandleUnitTable(Hashtable hashtable)
         {
+            hashtable.Cast<DictionaryEntry>().OrderBy(entry => entry.Value).ToList();
+            ParentUnit parentUnitMain = new ParentUnit();
+            parentUnitMain.Name = "";
+            parentUnitMain.Parent = "";
+            Unit lastItem = null;
             var index = 0;
-            var units = new List<IUnit>();
+            var units = new ArrayList();
             string parentName = "";
+
             foreach (DictionaryEntry item in hashtable)
             {
                 if (item.Value.Equals(""))
                 {
                     var parentUnit = new ParentUnit();
+                    parentUnit.Child = new List<Unit>();
                     parentUnit.Name = (string)item.Key;
                     parentName = (string)item.Key;
-                } else if (item.Value.Equals(parentName))
-                {
-                    
+                    units.Add(parentUnit);
+                    parentUnitMain = parentUnit;
                 }
+                else if (item.Value.Equals(parentUnitMain.Name))
+                {
+                    Unit unit = new Unit();
+                    unit.Name = (string)item.Key;
+                    unit.Parent = (string)item.Value;
+                    parentUnitMain.Child.Add(unit);
+                    lastItem = unit;
+                }
+                //else if (!ReferenceEquals(item.Value, "") && lastItem != null && ReferenceEquals(item.Value, lastItem.Name))
+                //{
+                //    Unit unit = new Unit();
 
-                
-            }    
-            
+                //}
+            }
 
             //for (var i = 1; i < unitTableLenght; i++)
             //{
