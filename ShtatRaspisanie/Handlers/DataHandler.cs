@@ -64,19 +64,22 @@ namespace ShtatRaspisanie.Handlers
                     parentUnitMain.Child.Add(unit);
                     //Сохраняем, как последний обработанный.
                     lastItem = unit;
-                    
+                    //Находим дочерние для дочерних элементов.
                 } else if (!ReferenceEquals(item.Parent, "") && lastItem != null && ReferenceEquals(item.Parent, lastItem.Name))
                 {
+                    //Получаем список штатных единиц для элемента.
                     item.StaffUnits = GetStaffUnits(item.Name);
+                    //Добавляем в последний элемент.
                     lastItem.Child.Add(item);
-                    Unit unit = new Unit();
+                    
 
                 }
             }
 
             return units;
         }
-
+        //Поиск штатных единиц. Возвращает список ШЕ,
+        //привязанных к имени элемента.
         public List<StaffUnit> GetStaffUnits(string unitName)
         {
             List<StaffUnit> staffUnits = new List<StaffUnit>();
