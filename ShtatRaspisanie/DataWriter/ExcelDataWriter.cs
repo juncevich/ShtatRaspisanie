@@ -10,8 +10,16 @@ namespace ShtatRaspisanie.DataWriter
         {
             var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("Штатное расписание");
+            var colA = worksheet.Column("A");
+            colA.Width = 30;
+            var colB = worksheet.Column("B");
+            colA.Width = 30;
+
             worksheet.Cell("A1").Value = "Штатное расписание";
-            
+            var BoldStyle = workbook.Style;
+            BoldStyle.Font.Bold = true;
+            BoldStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.General;
+            BoldStyle.Alignment.ReadingOrder = XLAlignmentReadingOrderValues.ContextDependent;
             int nestedChildCounter = 0;
             int index = 2;
            
@@ -22,6 +30,7 @@ namespace ShtatRaspisanie.DataWriter
                     int mainCounter = 0;
                     int childCounter = 0;
                     worksheet.Cell(index, 1).Value = unit.Name;
+                    worksheet.Cell(index, 1).Style = BoldStyle;
                     index++;
                     foreach (var staffUnit in unit.StaffUnits)
                     {
