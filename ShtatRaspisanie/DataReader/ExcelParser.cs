@@ -71,22 +71,6 @@ namespace ShtatRaspisanie.DataReader
             //    return null;
             //}
 
-            //var staffUnits = new List<StaffUnit>();
-            //for (var i = 1; i < staffUnitListTable.Rows.Count; i++)
-            //{
-            //    if (staffUnitListTable.Rows[i][1] != DBNull.Value)
-            //    {
-            //        var staffUnit = new StaffUnit();
-            //        {
-            //            staffUnit.Name = (string)staffUnitListTable.Rows[i][0];
-            //            staffUnit.PodrName = (string)staffUnitListTable.Rows[i][1];
-            //            staffUnit.Rate = Convert.ToInt32(staffUnitListTable.Rows[i][2]);
-            //        };
-            //        Console.WriteLine(staffUnit.Name + " " + staffUnit.PodrName + " " +
-            //                          staffUnit.Rate);
-            //        staffUnits.Add(staffUnit);
-            //    }
-            //}
 
             return staffUnits;
         }
