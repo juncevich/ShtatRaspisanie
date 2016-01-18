@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace ShtatRaspisanie.Entities
 {
+    //Подразделение.
     public class Unit : IUnit
     {
         //Наименование подразделения.

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ShtatRaspisanie.Entities;
+using System.Collections.Generic;
 using System.Linq;
-using ShtatRaspisanie.Entities;
 
 namespace ShtatRaspisanie.Handlers
 {

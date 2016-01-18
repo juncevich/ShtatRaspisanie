@@ -1,5 +1,6 @@
 ﻿namespace ShtatRaspisanie.Entities
 {
+    //Штатная единица.
     public class StaffUnit : IStaffUnit
     {
         public string Name { get; set; }
@@ -19,7 +20,7 @@
 
         public void DisplayStaffUnit()
         {
-            System.Console.WriteLine(Name + " " + PodrName + " " + Rate);
+            System.Console.WriteLine(Name + @" " + PodrName + @" " + Rate);
         }
     }
 }

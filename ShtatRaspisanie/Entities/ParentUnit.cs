@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ShtatRaspisanie.Entities
 {
@@ -36,10 +35,9 @@ namespace ShtatRaspisanie.Entities
 
             return result;
         }
+
         public void Display(ParentUnit unit)
         {
-            
-            
         }
     }
 }

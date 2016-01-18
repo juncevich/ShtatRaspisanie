@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using ShtatRaspisanie.Entities;
+﻿using ShtatRaspisanie.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace ShtatRaspisanie.DataWriter
 {
+    // Тестовый класс, выводит список в консоль.
     public class ConsoleDataWriter : IDataWriter
     {
         public void WriteData(List<Unit> units)
@@ -49,7 +50,6 @@ namespace ShtatRaspisanie.DataWriter
                     {
                         Console.WriteLine("    Итого в " + child.Name + ": " + childCounter);
                     }
-
                 }
                 if (mainCounter != 0)
                 {

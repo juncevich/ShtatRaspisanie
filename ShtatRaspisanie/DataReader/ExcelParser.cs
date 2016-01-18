@@ -65,20 +65,17 @@ namespace ShtatRaspisanie.DataReader
                 staffUnitRow = staffUnitRow.RowBelow();
             }
 
-
-
-
             return staffUnits;
         }
 
-        public void ValidateUnitFile( string fileName)
+        public void ValidateUnitFile(string fileName)
         {
             var workbook = new XLWorkbook(fileName);
             var workSheet = workbook.Worksheet(1);
             var firstRowUsed = workSheet.FirstRowUsed();
             var staffUnitRow = firstRowUsed.RowUsed();
             if (staffUnitRow.Cell(1).GetString() != "Name" &&
-                staffUnitRow.Cell(2).GetString() != "Parent" 
+                staffUnitRow.Cell(2).GetString() != "Parent"
                 )
             {
                 MessageBox.Show(@"Выбран не корректный файл.

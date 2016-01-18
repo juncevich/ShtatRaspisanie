@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace ShtatRaspisanie.Entities
+﻿namespace ShtatRaspisanie.Entities
 {
-    public interface IUnitло
+    public interface IUnit
     {
-
-
         string ToString();
     }
 }
