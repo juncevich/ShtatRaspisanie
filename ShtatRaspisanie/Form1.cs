@@ -27,7 +27,8 @@ namespace ShtatRaspisanie
             {
                 MessageBox.Show(@"Файл со списком подразделений выбран!");
                 _unitFileName = openUnitListFile.FileName;
-
+                ExcelParser parser = new ExcelParser();
+                parser.ValidateUnitFile(_unitFileName);
             }
         }
 
@@ -41,7 +42,8 @@ namespace ShtatRaspisanie
             {
                 MessageBox.Show(@"Файл со списком штатных единиц выбран!");
                 _staffUnitFileName = openStaffUnitListFile.FileName;
-
+                ExcelParser parser = new ExcelParser();
+                parser.ValidateStaffUnitFile(_staffUnitFileName);
             }
         }
 

@@ -3,6 +3,7 @@ using ShtatRaspisanie.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows.Forms;
 
 namespace ShtatRaspisanie.DataReader
 {
@@ -48,6 +49,7 @@ namespace ShtatRaspisanie.DataReader
             var workSheet = workbook.Worksheet(1);
             var firstRowUsed = workSheet.FirstRowUsed();
             var staffUnitRow = firstRowUsed.RowUsed();
+
             staffUnitRow = staffUnitRow.RowBelow();
             var staffUnits = new List<StaffUnit>();
             while (!staffUnitRow.Cell(1).IsEmpty())
@@ -63,16 +65,48 @@ namespace ShtatRaspisanie.DataReader
                 staffUnitRow = staffUnitRow.RowBelow();
             }
 
-            //if ((string)staffUnitListTable.Rows[0][0] != "Name" &&
-            //    (string)staffUnitListTable.Rows[0][1] != "Podr_name" &&
-            //    (string)staffUnitListTable.Rows[0][1] != "RATE")
-            //{
-            //    MessageBox.Show(@"Выбран не корректный файл");
-            //    return null;
-            //}
+
 
 
             return staffUnits;
+        }
+
+        public void ValidateUnitFile( string fileName)
+        {
+            var workbook = new XLWorkbook(fileName);
+            var workSheet = workbook.Worksheet(1);
+            var firstRowUsed = workSheet.FirstRowUsed();
+            var staffUnitRow = firstRowUsed.RowUsed();
+            if (staffUnitRow.Cell(1).GetString() != "Name" &&
+                staffUnitRow.Cell(2).GetString() != "Parent" 
+                )
+            {
+                MessageBox.Show(@"Выбран не корректный файл.
+                                 1-й столбец должен называться Namе,
+                                 2-й столбец должен называться Podr_name,
+                                 ");
+                Application.Restart();
+            }
+        }
+
+        public void ValidateStaffUnitFile(string fileName)
+        {
+            var workbook = new XLWorkbook(fileName);
+            var workSheet = workbook.Worksheet(1);
+            var firstRowUsed = workSheet.FirstRowUsed();
+            var staffUnitRow = firstRowUsed.RowUsed();
+            if (staffUnitRow.Cell(1).GetString() != "Name" &&
+                staffUnitRow.Cell(2).GetString() != "Podr_name" &&
+                staffUnitRow.Cell(3).GetString() != "Rate"
+                )
+            {
+                MessageBox.Show(@"Выбран не корректный файл.
+                                 1-й столбец должен называться Namе,
+                                 2-й столбец должен называться Podr_name,
+                                 3-й столбец должен называться Rate,
+                                 ");
+                Application.Restart();
+            }
         }
     }
 }

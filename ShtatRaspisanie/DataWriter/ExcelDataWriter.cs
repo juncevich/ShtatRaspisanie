@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Forms;
 using ClosedXML.Excel;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Logical;
 using ShtatRaspisanie.Entities;
@@ -25,15 +26,16 @@ namespace ShtatRaspisanie.DataWriter
             var childUnitStyle = workbook.Style;
             childUnitStyle.Font.Bold = true;
             childUnitStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-
-
-
-            worksheet.Cell("A1").Value = "Штатное расписание";
-            worksheet.Cell("A1").Style.Font.Bold = true;
-            worksheet.Cell("A1").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
-
             
-            int index = 2;
+
+            worksheet.Cell(2, 1).Value = "Подразделение";
+            worksheet.Cell(2, 2).Value = "ШЕ";
+            worksheet.Cell(2, 3).Value = "Ставки";
+            worksheet.Cell(2, 1).Style.Font.Bold = true;
+            worksheet.Cell(2, 2).Style.Font.Bold = true;
+            worksheet.Cell(2, 3).Style.Font.Bold = true;
+
+            int index = 3;
            
             foreach (ParentUnit unit in units)
             {
@@ -91,6 +93,8 @@ namespace ShtatRaspisanie.DataWriter
                         {
                             
                             worksheet.Cell(index, 1).Value = "    " + nestedChild.Name;
+                            worksheet.Cell(index, 1).Style.Font.Bold = true;
+                            worksheet.Cell(index, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Justify;
                             index++;
                             nestedChildCounter = 0;
                             foreach (var nestedStaffUnit in nestedChild.StaffUnits)
@@ -145,8 +149,18 @@ namespace ShtatRaspisanie.DataWriter
                 }
                
             }
-
-            workbook.SaveAs("C:\\1\\StaffingFile.xlsx");
+            worksheet.RangeUsed().Style.Border.InsideBorder = XLBorderStyleValues.Thin;
+            worksheet.RangeUsed().Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Excel file (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+            
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                workbook.SaveAs(saveFileDialog1.FileName);
+            }
+            
         }
     }
 }
