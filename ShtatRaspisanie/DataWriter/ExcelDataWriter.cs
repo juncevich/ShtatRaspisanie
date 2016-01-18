@@ -22,12 +22,10 @@ namespace ShtatRaspisanie.DataWriter
                     int mainCounter = 0;
                     int childCounter = 0;
                     worksheet.Cell(index, 1).Value = unit.Name;
-                    worksheet.Cell(index, 2).Value = unit.Parent;
                     index++;
                     foreach (var staffUnit in unit.StaffUnits)
                     {
-                        worksheet.Cell(index, 1).Value = staffUnit.Name;
-                        worksheet.Cell(index, 2).Value = staffUnit.PodrName;
+                        worksheet.Cell(index, 2).Value = staffUnit.Name;
                         worksheet.Cell(index, 3).Value = staffUnit.Rate;
 
                         mainCounter = mainCounter + staffUnit.Rate;
@@ -38,12 +36,10 @@ namespace ShtatRaspisanie.DataWriter
                     {
                         childCounter = 0;
                         worksheet.Cell(index, 1).Value = child.Name;
-                        worksheet.Cell(index, 2).Value = child.Parent;
                         index++;
                         foreach (var childStaffUnit in child.StaffUnits)
                         {
-                            worksheet.Cell(index, 1).Value = childStaffUnit.Name;
-                            worksheet.Cell(index, 2).Value = childStaffUnit.PodrName;
+                            worksheet.Cell(index, 2).Value = childStaffUnit.Name;
                             worksheet.Cell(index, 3).Value = childStaffUnit.Rate;
 
                             childCounter = childCounter + childStaffUnit.Rate;
@@ -53,13 +49,11 @@ namespace ShtatRaspisanie.DataWriter
                         {
                             nestedChildCounter = 0;
                             worksheet.Cell(index, 1).Value = nestedChild.Name;
-                            worksheet.Cell(index, 2).Value = nestedChild.Parent;
                             index++;
 
                             foreach (var nestedStaffUnit in nestedChild.StaffUnits)
                             {
-                                worksheet.Cell(index, 1).Value = nestedStaffUnit.Name;
-                                worksheet.Cell(index, 2).Value = nestedStaffUnit.PodrName;
+                                worksheet.Cell(index, 2).Value = nestedStaffUnit.Name;
                                 worksheet.Cell(index, 3).Value = nestedStaffUnit.Rate;
 
                                 nestedChildCounter = nestedChildCounter + nestedStaffUnit.Rate;
@@ -76,12 +70,14 @@ namespace ShtatRaspisanie.DataWriter
                         if (childCounter != 0)
                         {
                             worksheet.Cell(index, 1).Value = "    Итого в " + child.Name + ": " + childCounter;
+                            index++;
                         }
 
                     }
                     if (mainCounter != 0)
                     {
                         worksheet.Cell(index, 1).Value = "Итого в " + unit.Name + ": " + mainCounter;
+                        index++;
                     }
 
                     index++;
