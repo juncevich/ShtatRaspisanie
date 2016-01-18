@@ -1,4 +1,5 @@
 ﻿using ShtatRaspisanie.DataReader;
+using ShtatRaspisanie.DataWriter;
 using ShtatRaspisanie.Handlers;
 using System;
 using System.ComponentModel;
@@ -8,6 +9,9 @@ namespace ShtatRaspisanie
 {
     public partial class Form1 : Form
     {
+        private string _unitFileName;
+        private string _staffUnitFileName;
+
         public Form1()
         {
             InitializeComponent();
@@ -22,21 +26,12 @@ namespace ShtatRaspisanie
             if (openUnitListFile.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show(@"Файл со списком подразделений выбран!");
-                var dataHandler = new DataHandler();
-                ExcelParser parser = new ExcelParser();
-                string unitFileName = openUnitListFile.FileName;
-                //dataHandler.HandleUnitTable(new ExcelParser().GetUnitList(openUnitListFile.FileName));
-                //StaffDao staffDao = StaffDao.GetInstance();
-                //staffDao.MakeAllUnits(parser.GetUnitList(openUnitListFile.FileName));
-                //staffDao.SetChildToUnitList();
+                _unitFileName = openUnitListFile.FileName;
+
             }
         }
 
         private void openSpisokShtatnEdinic_FileOk(object sender, CancelEventArgs e)
-        {
-        }
-
-        private void openFileDialog1_FileOk_1(object sender, CancelEventArgs e)
         {
         }
 
@@ -45,18 +40,17 @@ namespace ShtatRaspisanie
             if (openStaffUnitListFile.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show(@"Файл со списком штатных единиц выбран!");
-                ExcelParser parser = new ExcelParser();
-                var dataHandler = new DataHandler();
-                dataHandler.HandleUnitTable(parser.GetUnitList(openUnitListFile.FileName), parser.GetStaffUnitList(openStaffUnitListFile.FileName));
-                //parser.GetStaffUnitList(openStaffUnitListFile.FileName);
-                //StaffDao staffDao = StaffDao.GetInstance();
-                //staffDao.MakeAllStaffUnits(parser.GetStaffUnitList(openStaffUnitListFile.FileName));
-                //staffDao.Init();
+                _staffUnitFileName = openStaffUnitListFile.FileName;
+
             }
         }
 
         private void shtatnoeRaspisanieButton_Click(object sender, EventArgs e)
         {
+            TestDataWriter testDataWriter = new TestDataWriter();
+            DataHandler dataHandler = new DataHandler();
+            ExcelParser parser = new ExcelParser();
+            testDataWriter.WriteData(dataHandler.HandleUnitTable(parser.GetUnitList(_unitFileName), parser.GetStaffUnitList(_staffUnitFileName)));
             //WriteExcelFile.WriteShtatnoeRaspisanie(ExcelParser.ParseSpisokPodrazdeleniyFile,
             //    ExcelParser.ParseStaffUnitsFile);
         }

@@ -1,7 +1,7 @@
-﻿using ShtatRaspisanie.Entities;
+﻿using System;
 using System.Collections.Generic;
 
-namespace ShtatRaspisanie
+namespace ShtatRaspisanie.Entities
 {
     public class Unit
     {
@@ -27,6 +27,24 @@ namespace ShtatRaspisanie
         {
             var view = Name + " " + Parent;
             return view;
+        }
+
+        public void Display(Unit unit)
+        {
+            Console.WriteLine(unit.Name + @" " + unit.Parent);
+            foreach (var staffUnit in unit.StaffUnits)
+            {
+                Console.WriteLine(staffUnit.Name + @" " + staffUnit.PodrName + @" " + staffUnit.Rate);
+            }
+
+            foreach (var child in unit.Child)
+            {
+                Console.WriteLine(child.Name + @" " + child.Parent);
+                foreach (var childStaffUnit in StaffUnits)
+                {
+                    Console.WriteLine(childStaffUnit.Name + @" " + childStaffUnit.PodrName + @" " + childStaffUnit.Rate);
+                }
+            }
         }
     }
 }

@@ -1,12 +1,8 @@
 ﻿using ClosedXML.Excel;
-using Excel;
 using ShtatRaspisanie.Entities;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Windows.Forms;
 
 namespace ShtatRaspisanie.DataReader
 {
@@ -51,20 +47,20 @@ namespace ShtatRaspisanie.DataReader
             var workbook = new XLWorkbook(fileName);
             var workSheet = workbook.Worksheet(1);
             var firstRowUsed = workSheet.FirstRowUsed();
-            var StaffUnitRow = firstRowUsed.RowUsed();
-            StaffUnitRow = StaffUnitRow.RowBelow();
+            var staffUnitRow = firstRowUsed.RowUsed();
+            staffUnitRow = staffUnitRow.RowBelow();
             var staffUnits = new List<StaffUnit>();
-            while (!StaffUnitRow.Cell(1).IsEmpty())
+            while (!staffUnitRow.Cell(1).IsEmpty())
             {
                 var staffUnit = new StaffUnit();
-                var name = StaffUnitRow.Cell(1).GetString();
-                var parentUnit = StaffUnitRow.Cell(2).GetString();
-                var rate = Convert.ToInt32(StaffUnitRow.Cell(3).GetString());
+                var name = staffUnitRow.Cell(1).GetString();
+                var parentUnit = staffUnitRow.Cell(2).GetString();
+                var rate = Convert.ToInt32(staffUnitRow.Cell(3).GetString());
                 staffUnit.Name = name;
                 staffUnit.PodrName = parentUnit;
                 staffUnit.Rate = rate;
                 staffUnits.Add(staffUnit);
-                StaffUnitRow = StaffUnitRow.RowBelow();
+                staffUnitRow = staffUnitRow.RowBelow();
             }
 
             //if ((string)staffUnitListTable.Rows[0][0] != "Name" &&

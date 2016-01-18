@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ShtatRaspisanie.Entities
 {
-    public class ParentUnit
+    public class ParentUnit : Unit
     {
         //Наименование подразделения.
         public string Name { get; set; }
@@ -20,6 +21,32 @@ namespace ShtatRaspisanie.Entities
         {
             var view = Name + " " + Parent;
             return view;
+        }
+
+        public void Display(ParentUnit unit)
+        {
+            Console.WriteLine(unit.Name + @" " + unit.Parent);
+            foreach (var staffUnit in unit.StaffUnits)
+            {
+                Console.WriteLine("  " + staffUnit.Name + @" " + staffUnit.PodrName + @" " + staffUnit.Rate);
+            }
+
+            foreach (var child in unit.Child)
+            {
+                Console.WriteLine(" " + child.Name + @" " + child.Parent);
+                foreach (var childStaffUnit in child.StaffUnits)
+                {
+                    Console.WriteLine("    " + childStaffUnit.Name + @" " + childStaffUnit.PodrName + @" " + childStaffUnit.Rate);
+                }
+                foreach (var nestedChild in child.Child)
+                {
+                    Console.WriteLine("      " + nestedChild.Name + @" " + nestedChild.Parent);
+                    foreach (var nestedStaffUnit in nestedChild.StaffUnits)
+                    {
+                        Console.WriteLine("        " + nestedStaffUnit.Name + @" " + nestedStaffUnit.PodrName + @" " + nestedStaffUnit.Rate);
+                    }
+                }
+            }
         }
     }
 }

@@ -1,19 +1,23 @@
-﻿using ShtatRaspisanie.Entities;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Collections.Generic;
+using ShtatRaspisanie.Entities;
 
 namespace ShtatRaspisanie.Handlers
 {
     public class DataHandler : IDataHandler
     {
+        private List<Unit> _units;
+
+        public List<Unit> Units
+        {
+            get { return _units; }
+        }
+
         // Список штатных единиц.
-        private List<StaffUnit> _staffUnits; 
-        //Соотнесение категориям подкатегорий, 
+        private List<StaffUnit> _staffUnits;
+
+        //Соотнесение категориям подкатегорий,
         //подкатегориям и категориям штатных единиц.
-        public ArrayList HandleUnitTable(List<Unit> listOfString, List<StaffUnit> staffUnits)
+        public List<Unit> HandleUnitTable(List<Unit> listOfString, List<StaffUnit> staffUnits)
         {
             //Загружаем список штатных единиц.
             _staffUnits = staffUnits;
@@ -25,9 +29,9 @@ namespace ShtatRaspisanie.Handlers
             //Создаем элемент, который указывает
             //на последний обработанный элемент.
             Unit lastItem = new Unit();
-            // TO DO Изменить коллекцию на List<IUnit>  
-            var units = new ArrayList();
-            
+            // TO DO Изменить коллекцию на List<IUnit>
+            var units = new List<Unit>();
+
             //Перебираем значения из файла с подразделениями.
             foreach (var item in listOfString)
             {
@@ -40,7 +44,7 @@ namespace ShtatRaspisanie.Handlers
                     //Дабы не кидало исключение.
                     parentUnit.Child = new List<Unit>();
                     //Присваиваем Имя
-                    parentUnit.Name = (string)item.Name;
+                    parentUnit.Name = item.Name;
                     //Присваиваем пустое значение родителя.
                     parentUnit.Parent = "";
                     //Получаем список штатных единиц, привязанных к элементу
@@ -49,15 +53,14 @@ namespace ShtatRaspisanie.Handlers
                     units.Add(parentUnit);
                     //Сохраняем элемент, для дальнейшего сравнения с именем.
                     parentUnitMain = parentUnit;
-                    
                 }
-                    //Находим дочерний элемент.
+                //Находим дочерний элемент.
                 else if (item.Parent.Equals(parentUnitMain.Name))
                 {
                     //Создание и инициализация.
                     Unit unit = new Unit();
-                    unit.Name = (string)item.Name;
-                    unit.Parent = (string)item.Parent;
+                    unit.Name = item.Name;
+                    unit.Parent = item.Parent;
                     //Получаем список штатных единиц дочернего элемента.
                     unit.StaffUnits = GetStaffUnits(unit.Name);
                     //Добавляем к родительскому элементу.
@@ -65,19 +68,19 @@ namespace ShtatRaspisanie.Handlers
                     //Сохраняем, как последний обработанный.
                     lastItem = unit;
                     //Находим дочерние для дочерних элементов.
-                } else if (!ReferenceEquals(item.Parent, "") && lastItem != null && ReferenceEquals(item.Parent, lastItem.Name))
+                }
+                else if (!ReferenceEquals(item.Parent, "") && ReferenceEquals(item.Parent, lastItem.Name))
                 {
                     //Получаем список штатных единиц для элемента.
                     item.StaffUnits = GetStaffUnits(item.Name);
                     //Добавляем в последний элемент.
                     lastItem.Child.Add(item);
-                    
-
                 }
             }
-
+            _units = units;
             return units;
         }
+
         //Поиск штатных единиц. Возвращает список ШЕ,
         //привязанных к имени элемента.
         public List<StaffUnit> GetStaffUnits(string unitName)
@@ -85,12 +88,10 @@ namespace ShtatRaspisanie.Handlers
             List<StaffUnit> staffUnits = new List<StaffUnit>();
             foreach (var item in _staffUnits)
             {
-
                 if (item.PodrName.Equals(unitName))
                 {
                     staffUnits.Add(item);
                 }
-
             }
 
             return staffUnits;
