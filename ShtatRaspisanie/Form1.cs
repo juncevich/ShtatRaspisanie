@@ -25,29 +25,27 @@ namespace ShtatRaspisanie
         {
             if (openUnitListFile.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show(@"Файл со списком подразделений выбран!");
                 _unitFileName = openUnitListFile.FileName;
                 ExcelParser parser = new ExcelParser();
                 parser.ValidateUnitFile(_unitFileName);
             }
         }
 
-        private void openSpisokShtatnEdinic_FileOk(object sender, CancelEventArgs e)
+        private void openStaffUnitsList_FileOk(object sender, CancelEventArgs e)
         {
         }
-
-        private void SpisokShtatnEdinicButton_Click(object sender, EventArgs e)
+        
+        private void staffUnitsListButton_Click(object sender, EventArgs e)
         {
             if (openStaffUnitListFile.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show(@"Файл со списком штатных единиц выбран!");
                 _staffUnitFileName = openStaffUnitListFile.FileName;
                 ExcelParser parser = new ExcelParser();
                 parser.ValidateStaffUnitFile(_staffUnitFileName);
             }
         }
 
-        private void shtatnoeRaspisanieButton_Click(object sender, EventArgs e)
+        private void createStaffingButton_Click(object sender, EventArgs e)
         {
             ConsoleDataWriter consoleDataWriter = new ConsoleDataWriter();
             ExcelDataWriter excelDataWriter = new ExcelDataWriter();
@@ -56,8 +54,6 @@ namespace ShtatRaspisanie
             consoleDataWriter.WriteData(dataHandler.HandleUnitTable(parser.GetUnitList(_unitFileName), parser.GetStaffUnitList(_staffUnitFileName)));
             excelDataWriter.WriteData(dataHandler.HandleUnitTable(parser.GetUnitList(_unitFileName), parser.GetStaffUnitList(_staffUnitFileName)));
 
-            //WriteExcelFile.WriteShtatnoeRaspisanie(ExcelParser.ParseSpisokPodrazdeleniyFile,
-            //    ExcelParser.ParseStaffUnitsFile);
         }
     }
 }

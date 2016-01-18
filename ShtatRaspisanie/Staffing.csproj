@@ -65,11 +65,8 @@
     <Compile Include="Entities\IStaffUnit.cs" />
     <Compile Include="Entities\IUnit.cs" />
     <Compile Include="Entities\ParentUnit.cs" />
-    <Compile Include="Entities\UnitWithOneNestedGrade.cs" />
-    <Compile Include="Entities\UnitWithTwoNestedGrade.cs" />
     <Compile Include="Handlers\DataHandler.cs" />
     <Compile Include="Handlers\IDataHandler.cs" />
-    <Compile Include="StaffDAO.cs" />
     <Compile Include="Entities\Unit.cs" />
     <Compile Include="Entities\StaffUnit.cs" />
     <Compile Include="DataReader\ExcelParser.cs" />
@@ -81,8 +78,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitBuilder.cs" />
-    <Compile Include="WriteExcelFile.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

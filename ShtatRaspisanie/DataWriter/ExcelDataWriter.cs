@@ -6,7 +6,7 @@ using ShtatRaspisanie.Entities;
 
 namespace ShtatRaspisanie.DataWriter
 {
-    public class ExcelDataWriter
+    public class ExcelDataWriter:IDataWriter
     {
         public void WriteData(List<Unit> units)
         {

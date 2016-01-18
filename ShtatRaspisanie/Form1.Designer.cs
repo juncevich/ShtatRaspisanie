@@ -53,7 +53,7 @@
             this.SpisokShtatnEdinicButton.TabIndex = 1;
             this.SpisokShtatnEdinicButton.Text = "Выбрать список штатных единиц";
             this.SpisokShtatnEdinicButton.UseVisualStyleBackColor = true;
-            this.SpisokShtatnEdinicButton.Click += new System.EventHandler(this.SpisokShtatnEdinicButton_Click);
+            this.SpisokShtatnEdinicButton.Click += new System.EventHandler(this.staffUnitsListButton_Click);
             // 
             // openUnitListFile
             // 
@@ -63,7 +63,7 @@
             // openStaffUnitListFile
             // 
             this.openStaffUnitListFile.FileName = "openStaffUnitListFile";
-            this.openStaffUnitListFile.FileOk += new System.ComponentModel.CancelEventHandler(this.openSpisokShtatnEdinic_FileOk);
+            this.openStaffUnitListFile.FileOk += new System.ComponentModel.CancelEventHandler(this.openStaffUnitsList_FileOk);
             // 
             // shtatnoeRaspisanieButton
             // 
@@ -73,7 +73,7 @@
             this.shtatnoeRaspisanieButton.TabIndex = 2;
             this.shtatnoeRaspisanieButton.Text = "Сформировать штатное расписание";
             this.shtatnoeRaspisanieButton.UseVisualStyleBackColor = true;
-            this.shtatnoeRaspisanieButton.Click += new System.EventHandler(this.shtatnoeRaspisanieButton_Click);
+            this.shtatnoeRaspisanieButton.Click += new System.EventHandler(this.createStaffingButton_Click);
             // 
             // Form1
             // 

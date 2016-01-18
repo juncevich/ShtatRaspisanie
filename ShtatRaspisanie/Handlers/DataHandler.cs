@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ShtatRaspisanie.Entities;
 
 namespace ShtatRaspisanie.Handlers
@@ -85,16 +86,7 @@ namespace ShtatRaspisanie.Handlers
         //привязанных к имени элемента.
         public List<StaffUnit> GetStaffUnits(string unitName)
         {
-            List<StaffUnit> staffUnits = new List<StaffUnit>();
-            foreach (var item in _staffUnits)
-            {
-                if (item.PodrName.Equals(unitName))
-                {
-                    staffUnits.Add(item);
-                }
-            }
-
-            return staffUnits;
+            return _staffUnits.Where(item => item.PodrName.Equals(unitName)).ToList();
         }
     }
 }
