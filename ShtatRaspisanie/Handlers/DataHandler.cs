@@ -8,13 +8,15 @@ namespace ShtatRaspisanie.Handlers
 {
     public class DataHandler : IDataHandler
     {
-        public void HandleData(DataTable unitTable, List<StaffUnit> staffUnits)
+        private List<StaffUnit> _staffUnits; 
+        public void HandleData(List<Unit> units, List<StaffUnit> staffUnits)
         {
+
         }
 
-        public ArrayList HandleUnitTable(List<Unit> listOfString)
+        public ArrayList HandleUnitTable(List<Unit> listOfString, List<StaffUnit> staffUnits)
         {
-            
+            _staffUnits = staffUnits;
             ParentUnit parentUnitMain = new ParentUnit();
             parentUnitMain.Name = "";
             parentUnitMain.Parent = "";
@@ -31,6 +33,7 @@ namespace ShtatRaspisanie.Handlers
                     parentUnit.Child = new List<Unit>();
                     parentUnit.Name = (string)item.Name;
                     parentUnit.Parent = "";
+                    parentUnit.StaffUnits = GetStaffUnits(parentUnit.Name);
                     parentName = (string)item.Name;
                     units.Add(parentUnit);
                     parentUnitMain = parentUnit;
@@ -40,33 +43,35 @@ namespace ShtatRaspisanie.Handlers
                     Unit unit = new Unit();
                     unit.Name = (string)item.Name;
                     unit.Parent = (string)item.Parent;
+                    unit.StaffUnits = GetStaffUnits(unit.Name);
                     parentUnitMain.Child.Add(unit);
                     lastItem = unit;
                 } else if (!ReferenceEquals(item.Parent, "") && lastItem != null && ReferenceEquals(item.Parent, lastItem.Name))
                 {
+                    item.StaffUnits = GetStaffUnits(item.Name);
                     lastItem.Child.Add(item);
                     Unit unit = new Unit();
 
                 }
             }
 
-            //for (var i = 1; i < unitTableLenght; i++)
-            //{
-            //    var unit = new Unit();
-            //    unit.Name = (string) dataTable.Rows[i][0];
-            //    if (dataTable.Rows[i][1] == DBNull.Value)
-            //    {
-            //        unit.Parent = " ";
-            //    }
-            //    else
-            //    {
-            //        unit.Parent = (string) dataTable.Rows[i][1];
-            //    }
-            //    units.Add(unit);
-
-            //    return units;
-            //}
             return units;
+        }
+
+        public List<StaffUnit> GetStaffUnits(string unitName)
+        {
+            List<StaffUnit> staffUnits = new List<StaffUnit>();
+            foreach (var item in _staffUnits)
+            {
+
+                if (item.PodrName.Equals(unitName))
+                {
+                    staffUnits.Add(item);
+                }
+
+            }
+
+            return staffUnits;
         }
     }
 }
