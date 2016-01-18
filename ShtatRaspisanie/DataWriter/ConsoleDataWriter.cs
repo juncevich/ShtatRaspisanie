@@ -3,7 +3,7 @@ using ShtatRaspisanie.Entities;
 
 namespace ShtatRaspisanie.DataWriter
 {
-    public class TestDataWriter : IDataWriter
+    public class ConsoleDataWriter : IDataWriter
     {
         public void WriteData(List<Unit> units)
         {

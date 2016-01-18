@@ -23,6 +23,19 @@ namespace ShtatRaspisanie.Entities
             return view;
         }
 
+        public bool IsChildStaffUnit(ParentUnit unit)
+        {
+            bool result = false;
+            foreach (var childUnit in unit.Child)
+            {
+                if (childUnit.StaffUnits.Count > 0)
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
         public void Display(ParentUnit unit)
         {
             int mainCounter = 0;

@@ -47,10 +47,13 @@ namespace ShtatRaspisanie
 
         private void shtatnoeRaspisanieButton_Click(object sender, EventArgs e)
         {
-            TestDataWriter testDataWriter = new TestDataWriter();
+            ConsoleDataWriter consoleDataWriter = new ConsoleDataWriter();
+            ExcelDataWriter excelDataWriter = new ExcelDataWriter();
             DataHandler dataHandler = new DataHandler();
             ExcelParser parser = new ExcelParser();
-            testDataWriter.WriteData(dataHandler.HandleUnitTable(parser.GetUnitList(_unitFileName), parser.GetStaffUnitList(_staffUnitFileName)));
+            consoleDataWriter.WriteData(dataHandler.HandleUnitTable(parser.GetUnitList(_unitFileName), parser.GetStaffUnitList(_staffUnitFileName)));
+            excelDataWriter.WriteData(dataHandler.HandleUnitTable(parser.GetUnitList(_unitFileName), parser.GetStaffUnitList(_staffUnitFileName)));
+
             //WriteExcelFile.WriteShtatnoeRaspisanie(ExcelParser.ParseSpisokPodrazdeleniyFile,
             //    ExcelParser.ParseStaffUnitsFile);
         }
