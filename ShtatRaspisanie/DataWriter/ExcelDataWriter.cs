@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ClosedXML.Excel;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Logical;
 using ShtatRaspisanie.Entities;
 
 namespace ShtatRaspisanie.DataWriter
@@ -10,17 +11,28 @@ namespace ShtatRaspisanie.DataWriter
         {
             var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("Штатное расписание");
+
             var colA = worksheet.Column("A");
-            colA.Width = 30;
+            colA.Width = 20;
             var colB = worksheet.Column("B");
-            colA.Width = 30;
+            colB.Width = 35;
+
+
+           
+            
+            
+
+            var childUnitStyle = workbook.Style;
+            childUnitStyle.Font.Bold = true;
+            childUnitStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+
 
             worksheet.Cell("A1").Value = "Штатное расписание";
-            var BoldStyle = workbook.Style;
-            BoldStyle.Font.Bold = true;
-            BoldStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.General;
-            BoldStyle.Alignment.ReadingOrder = XLAlignmentReadingOrderValues.ContextDependent;
-            int nestedChildCounter = 0;
+            worksheet.Cell("A1").Style.Font.Bold = true;
+            worksheet.Cell("A1").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+
+            
             int index = 2;
            
             foreach (ParentUnit unit in units)
@@ -28,9 +40,13 @@ namespace ShtatRaspisanie.DataWriter
                 if (unit.StaffUnits!=null && unit.IsChildStaffUnit(unit))
                 {
                     int mainCounter = 0;
+                    int mainChildCounter = 0;
                     int childCounter = 0;
+                    int nestedChildCounter = 0;
+                    int mainNestedChildCounter = 0;
                     worksheet.Cell(index, 1).Value = unit.Name;
-                    worksheet.Cell(index, 1).Style = BoldStyle;
+                    worksheet.Cell(index, 1).Style.Font.Bold = true;
+                    worksheet.Cell(index, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
                     index++;
                     foreach (var staffUnit in unit.StaffUnits)
                     {
@@ -45,6 +61,7 @@ namespace ShtatRaspisanie.DataWriter
                     {
                         childCounter = 0;
                         worksheet.Cell(index, 1).Value = child.Name;
+                        worksheet.Cell(index, 1).Style = childUnitStyle;
                         index++;
                         foreach (var childStaffUnit in child.StaffUnits)
                         {
@@ -52,40 +69,58 @@ namespace ShtatRaspisanie.DataWriter
                             worksheet.Cell(index, 3).Value = childStaffUnit.Rate;
 
                             childCounter = childCounter + childStaffUnit.Rate;
+                            
                             index++;
                         }
+                        mainChildCounter = childCounter + mainNestedChildCounter;
                         foreach (var nestedChild in child.Child)
                         {
-                            nestedChildCounter = 0;
-                            worksheet.Cell(index, 1).Value = nestedChild.Name;
+                            
+                            worksheet.Cell(index, 1).Value = "    " + nestedChild.Name;
                             index++;
-
+                            nestedChildCounter = 0;
                             foreach (var nestedStaffUnit in nestedChild.StaffUnits)
                             {
                                 worksheet.Cell(index, 2).Value = nestedStaffUnit.Name;
                                 worksheet.Cell(index, 3).Value = nestedStaffUnit.Rate;
 
                                 nestedChildCounter = nestedChildCounter + nestedStaffUnit.Rate;
+                                mainNestedChildCounter = mainNestedChildCounter + nestedChildCounter;
                                 index++;
                             }
 
                             if (nestedChildCounter != 0)
                             {
-                                worksheet.Cell(index, 1).Value = "      Итого в " + nestedChild.Name + ": " + nestedChildCounter;
+                                worksheet.Cell(index, 1).Value = "Итого: " + nestedChild.Name;
+                                worksheet.Cell(index, 3).Value = nestedChildCounter;
+                                worksheet.Cell(index, 1).Style.Font.Bold = true;
+                                worksheet.Cell(index, 1).Style.Font.Italic = true;
+                                worksheet.Cell(index, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Justify;
+                                worksheet.Cell(index, 3).Style.Font.Bold = true;
                                 index++;
                             }
                         }
-                        mainCounter = mainCounter + childCounter + nestedChildCounter;
+                        mainCounter = mainCounter + mainChildCounter + mainNestedChildCounter ;
                         if (childCounter != 0)
                         {
-                            worksheet.Cell(index, 1).Value = "    Итого в " + child.Name + ": " + childCounter;
+                            worksheet.Cell(index, 1).Value = "    Итого: " + child.Name;
+                            worksheet.Cell(index, 3).Value = childCounter;
+                            worksheet.Cell(index, 1).Style.Font.Bold = true;
+                            worksheet.Cell(index, 1).Style.Font.Italic = true;
+                            worksheet.Cell(index, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Justify;
+                            worksheet.Cell(index, 3).Style.Font.Bold = true;
                             index++;
                         }
 
                     }
                     if (mainCounter != 0)
                     {
-                        worksheet.Cell(index, 1).Value = "Итого в " + unit.Name + ": " + mainCounter;
+                        worksheet.Cell(index, 1).Value = "Итого: " + unit.Name;
+                        worksheet.Cell(index, 3).Value = mainCounter;
+                        worksheet.Cell(index, 1).Style.Font.Bold = true;
+                        worksheet.Cell(index, 1).Style.Font.Italic = true;
+                        worksheet.Cell(index, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Justify;
+                        worksheet.Cell(index, 3).Style.Font.Bold = true; 
                         index++;
                     }
 
