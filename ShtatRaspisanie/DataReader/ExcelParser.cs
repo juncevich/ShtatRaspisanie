@@ -13,7 +13,7 @@ namespace ShtatRaspisanie.DataReader
     //Класс, который считывает xlsx файл и разбирает его на объекты.
     public class ExcelParser : IParser
     {
-        public Hashtable GetUnitList(string fileName)
+        public List<Unit> GetUnitList(string fileName)
         {
             var workbook = new XLWorkbook(fileName);
             var workSheet = workbook.Worksheet(1);
@@ -24,16 +24,19 @@ namespace ShtatRaspisanie.DataReader
             ArrayList unitsArrayList = new ArrayList();
 
             DataTable dataUnitsTable = new DataTable();
-            Hashtable hashtable = new Hashtable();
+            List<Unit> units = new List<Unit>();
             while (!categoryRow.Cell(1).IsEmpty())
             {
+                Unit unit = new Unit();
                 var name = categoryRow.Cell(1).GetString();
                 var parent = categoryRow.Cell(2).GetString();
-                hashtable.Add(name, parent);
+                unit.Name = name;
+                unit.Parent = parent;
+                units.Add(unit);
                 categoryRow = categoryRow.RowBelow();
             }
 
-            return hashtable;
+            return units;
         }
 
         public DataTable GetUnitList()

@@ -12,9 +12,9 @@ namespace ShtatRaspisanie.Handlers
         {
         }
 
-        public ArrayList HandleUnitTable(Hashtable hashtable)
+        public ArrayList HandleUnitTable(List<Unit> listOfString)
         {
-            hashtable.Cast<DictionaryEntry>().OrderBy(entry => entry.Value).ToList();
+            
             ParentUnit parentUnitMain = new ParentUnit();
             parentUnitMain.Name = "";
             parentUnitMain.Parent = "";
@@ -23,22 +23,23 @@ namespace ShtatRaspisanie.Handlers
             var units = new ArrayList();
             string parentName = "";
 
-            foreach (DictionaryEntry item in hashtable)
+            foreach (var item in listOfString)
             {
-                if (item.Value.Equals(""))
+                if (item.Parent.Equals(""))
                 {
                     var parentUnit = new ParentUnit();
                     parentUnit.Child = new List<Unit>();
-                    parentUnit.Name = (string)item.Key;
-                    parentName = (string)item.Key;
+                    parentUnit.Name = (string)item.Name;
+                    parentUnit.Parent = "";
+                    parentName = (string)item.Name;
                     units.Add(parentUnit);
                     parentUnitMain = parentUnit;
                 }
-                else if (item.Value.Equals(parentUnitMain.Name))
+                else if (item.Parent.Equals(parentUnitMain.Name))
                 {
                     Unit unit = new Unit();
-                    unit.Name = (string)item.Key;
-                    unit.Parent = (string)item.Value;
+                    unit.Name = (string)item.Name;
+                    unit.Parent = (string)item.Parent;
                     parentUnitMain.Child.Add(unit);
                     lastItem = unit;
                 }
